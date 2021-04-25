@@ -33,6 +33,13 @@ module.exports = (sequelize, DataTypes) => {
           len: [60, 60],
         },
       },
+      breweryName: {
+        type: DataTypes.STRING,
+        unique: true,
+        validate: {
+          len: [5, 100],
+        },
+      },
     },
     {
       defaultScope: {
@@ -52,6 +59,10 @@ module.exports = (sequelize, DataTypes) => {
   );
   User.associate = function (models) {
     // associations can be defined here
+    User.hasMany(models.Image, { foreignKey: "userId" });
+    User.hasMany(models.Review, { foreignKey: "userId" });
+    User.hasMany(models.Beer, { foreignKey: "userId" });
+    User.hasMany(models.Event, { foreignKey: "userId" });
   };
 
   User.prototype.toSafeObject = function () {
