@@ -13,7 +13,7 @@ module.exports = (sequelize, DataTypes) => {
       },
       eventDate: {
         type: DataTypes.DATE,
-        defaultValue: Sequelize.fn("now"),
+        defaultValue: sequelize.fn("now"),
         allowNull: false,
       },
       userId: {
