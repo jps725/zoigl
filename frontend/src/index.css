@@ -1,1 +1,12 @@
 /* TODO Add site wide styles */
+html body {
+  /* background: rgb(252, 201, 58); */
+  background: linear-gradient(
+      0deg,
+      rgba(252, 201, 58, 1) 26%,
+      rgba(255, 255, 255, 1) 93%
+    )
+    no-repeat center center fixed;
+
+  background-size: cover;
+}

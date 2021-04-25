@@ -4,6 +4,10 @@ import { Route, Switch } from "react-router-dom";
 import SignupFormPage from "./components/SignupFormModal";
 import * as sessionActions from "./store/session";
 import Navigation from "./components/Navigation";
+import Beers from "./components/Beers";
+import Reviews from "./components/Reviews";
+import About from "./components/About";
+import Splash from "./components/Splash";
 
 function App() {
   const dispatch = useDispatch();
@@ -20,6 +24,18 @@ function App() {
         <Switch>
           <Route path="/signup">
             <SignupFormPage />
+          </Route>
+          <Route path="/beers">
+            <Beers />
+          </Route>
+          <Route path="/about">
+            <About />
+          </Route>
+          <Route path="/reviews">
+            <Reviews />
+          </Route>
+          <Route path="/splash">
+            <Splash />
           </Route>
         </Switch>
       )}

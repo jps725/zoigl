@@ -13,7 +13,7 @@ function Navigation({ isLoaded }) {
     sessionLinks = <ProfileButton user={sessionUser} />;
   } else {
     sessionLinks = (
-      <div>
+      <div className="form__buttons">
         <LoginFormModal />
         <SignupFormModal />
       </div>
@@ -21,12 +21,23 @@ function Navigation({ isLoaded }) {
   }
 
   return (
-    <ul>
-      <li>
-        <NavLink to="/">Home</NavLink>
+    <nav>
+      <menu>
+        <NavLink className="navLink" to="/splash">
+          Home
+        </NavLink>
+        <NavLink className="navLink" to="/beers">
+          Beers
+        </NavLink>
+        <NavLink className="navLink" to="/reviews">
+          Reviews
+        </NavLink>
+        <NavLink className="navLink" to="/about">
+          About
+        </NavLink>
         {isLoaded && sessionLinks}
-      </li>
-    </ul>
+      </menu>
+    </nav>
   );
 }
 

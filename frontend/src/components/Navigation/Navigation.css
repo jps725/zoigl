@@ -1,0 +1,73 @@
+nav {
+  background-image: url("../../images/hop-banner.svg");
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-position: center;
+  height: 4em;
+  position: relative;
+  z-index: 12;
+  border: 0;
+  /* display: flex; */
+  /* justify-content: space-between; */
+  /* padding: 0.2em; */
+  /* width: 100%; */
+}
+
+.navLink {
+  color: black;
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  padding: 1em;
+  height: 100%;
+  cursor: pointer;
+  font-family: "Maven Pro", sans-serif;
+}
+
+.navLink:active {
+  color: white;
+  text-decoration: none;
+}
+
+/* i {
+  display: none;
+  color: black;
+}
+@media screen and (max-width: 768px) {
+  i {
+    display: block;
+    position: absolute;
+    top: 0;
+    right: 0;
+    transform: translate(-100%, 75%);
+    font-size: 1.8rem;
+    cursor: pointer;
+  }
+} */
+menu {
+  display: flex;
+  align-items: center;
+
+  /* margin-right: -24px; */
+}
+@media screen and (max-width: 768px) {
+  menu {
+    display: none;
+  }
+}
+.form__buttons button {
+  border-radius: 4px;
+  color: black;
+  outline: none;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+  text-decoration: none;
+  padding: 0.25em;
+  font-family: "Maven Pro", sans-serif;
+}
+
+.form__buttons {
+  display: flex;
+  align-items: center;
+  margin-left: auto;
+}
