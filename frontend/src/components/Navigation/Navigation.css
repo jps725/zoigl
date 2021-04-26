@@ -47,9 +47,21 @@ nav {
 menu {
   display: flex;
   align-items: center;
+  flex-direction: row;
 
   /* margin-right: -24px; */
 }
+
+menu :nth-child(1) {
+  order: 1;
+}
+menu :nth-child(2) {
+  order: 1;
+}
+menu :nth-child(3) {
+  order: 1;
+}
+
 @media screen and (max-width: 768px) {
   menu {
     display: none;
@@ -69,5 +81,7 @@ menu {
 .form__buttons {
   display: flex;
   align-items: center;
+  order: 4;
+
   margin-left: auto;
 }

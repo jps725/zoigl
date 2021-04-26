@@ -9,8 +9,14 @@ import SignupFormModal from "../SignupFormModal";
 function Navigation({ isLoaded }) {
   const sessionUser = useSelector((state) => state.session.user);
   let sessionLinks;
+  let homeLink;
   if (sessionUser) {
     sessionLinks = <ProfileButton user={sessionUser} />;
+    homeLink = (
+      <NavLink className="navLink" to="/profile">
+        Home
+      </NavLink>
+    );
   } else {
     sessionLinks = (
       <div className="form__buttons">
@@ -18,22 +24,22 @@ function Navigation({ isLoaded }) {
         <SignupFormModal />
       </div>
     );
+    homeLink = (
+      <NavLink className="navLink" to="/splash">
+        Home
+      </NavLink>
+    );
   }
 
   return (
     <nav>
       <menu>
-        <NavLink className="navLink" to="/splash">
-          Home
-        </NavLink>
+        {homeLink}
         <NavLink className="navLink" to="/beers">
           Beers
         </NavLink>
         <NavLink className="navLink" to="/reviews">
           Reviews
-        </NavLink>
-        <NavLink className="navLink" to="/about">
-          About
         </NavLink>
         {isLoaded && sessionLinks}
       </menu>

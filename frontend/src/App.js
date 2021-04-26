@@ -6,8 +6,8 @@ import * as sessionActions from "./store/session";
 import Navigation from "./components/Navigation";
 import Beers from "./components/Beers";
 import Reviews from "./components/Reviews";
-import About from "./components/About";
 import Splash from "./components/Splash";
+import Profile from "./components/Profile";
 
 function App() {
   const dispatch = useDispatch();
@@ -28,14 +28,14 @@ function App() {
           <Route path="/beers">
             <Beers />
           </Route>
-          <Route path="/about">
-            <About />
-          </Route>
           <Route path="/reviews">
             <Reviews />
           </Route>
           <Route path="/splash">
             <Splash />
+          </Route>
+          <Route path="/profile">
+            <Profile />
           </Route>
         </Switch>
       )}

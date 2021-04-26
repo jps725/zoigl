@@ -1,0 +1,13 @@
+.button__profile {
+  border-radius: 4px;
+  color: rgb(211, 164, 10);
+  background-color: whitesmoke;
+  outline: none;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+  order: -1;
+}
+img {
+  width: 5em;
+  border-radius: 50%;
+}
