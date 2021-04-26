@@ -11,8 +11,12 @@ export async function csrfFetch(url, options = {}) {
   // the xsrf-token cookie
 
   if (options.method.toUpperCase() !== "GET") {
-    options.headers["Content-Type"] =
-      options.headers["Content-Type"] || "application/json";
+    if (options.headers["Content-Type"] === "multipart/form-data") {
+      delete options.headers["Content-Type"];
+    } else {
+      options.headers["Content-Type"] =
+        options.headers["Content-Type"] || "application/json";
+    }
     options.headers["XSRF-Token"] = Cookies.get("XSRF-TOKEN");
   }
   // default window fetch with url and options passed in
