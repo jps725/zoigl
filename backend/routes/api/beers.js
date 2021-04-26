@@ -17,12 +17,10 @@ const beerValidators = [
 router.get(
   "/",
   asyncHandler(async (req, res) => {
-    const { user } = req;
-    const userBeers = await db.Beer.findAll({ where: { userId: user.id } });
-    const recentBeers = await db.Beer.findAll({
-      order: ["updatedAt", "DESC"],
-      limit: 10,
-    });
-    res.json({ userBeers, recentBeers });
+    const beers = await db.Beer.findAll();
+
+    res.json({ beers });
   })
 );
+
+module.exports = router;

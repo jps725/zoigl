@@ -7,6 +7,7 @@ const {
 } = require("../../utils/auth.js");
 const { User } = require("../../db/models");
 
+const beersRouter = require("./beers");
 const sessionRouter = require("./session.js");
 const usersRouter = require("./users.js");
 // ***********TEST ROUTES***************
@@ -38,5 +39,6 @@ const usersRouter = require("./users.js");
 
 router.use("/session", sessionRouter);
 router.use("/users", usersRouter);
+router.use("/beers", beersRouter);
 
 module.exports = router;
