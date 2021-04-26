@@ -34,6 +34,7 @@ function ProfileButton({ user }) {
         <ul className="menu__profile--dropdown">
           <li>{user.username}</li>
           <li>{user.email}</li>
+          <img src={user.profileImageUrl} />
           <li>
             <button onClick={handleLogout}>Log Out</button>
           </li>

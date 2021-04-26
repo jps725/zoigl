@@ -38,18 +38,32 @@ export const restoreUser = () => async (dispatch) => {
 };
 
 export const signupUser = (user) => async (dispatch) => {
-  const { username, email, password } = user;
-  const res = await csrfFetch("/api/users", {
+  const { images, image, username, email, password } = user;
+  const formData = new FormData();
+  formData.append("username", username);
+  formData.append("email", email);
+  formData.append("password", password);
+
+  // for multiple files
+  if (images && images.length !== 0) {
+    for (var i = 0; i < images.length; i++) {
+      formData.append("images", images[i]);
+    }
+  }
+
+  // for single file
+  if (image) formData.append("image", image);
+
+  const res = await csrfFetch(`/api/users/`, {
     method: "POST",
-    body: JSON.stringify({
-      username,
-      email,
-      password,
-    }),
+    headers: {
+      "Content-Type": "multipart/form-data",
+    },
+    body: formData,
   });
-  const userData = await res.json();
-  dispatch(setUser(userData.user));
-  return res;
+
+  const data = await res.json();
+  dispatch(setUser(data.user));
 };
 
 export const logoutUser = () => async (dispatch) => {
