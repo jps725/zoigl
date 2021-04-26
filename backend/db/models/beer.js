@@ -31,6 +31,22 @@ module.exports = (sequelize, DataTypes) => {
           len: [3, 25],
         },
       },
+      abv: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+        validate: {
+          min: [0],
+          max: [30],
+        },
+      },
+      ibus: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+        validate: {
+          min: [0],
+          max: [200],
+        },
+      },
     },
     {}
   );

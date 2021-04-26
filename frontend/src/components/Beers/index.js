@@ -1,6 +1,7 @@
 import { useSelector, useDispatch } from "react-redux";
 import { useEffect } from "react";
 import { getBeers } from "../../store/beers";
+import AddBeerFormModal from "../AddBeerForm";
 
 export default function Beers() {
   const dispatch = useDispatch();
@@ -24,6 +25,7 @@ export default function Beers() {
   return (
     <div>
       <h1>Beers</h1>
+      <AddBeerFormModal />
       {beers}
     </div>
   );
