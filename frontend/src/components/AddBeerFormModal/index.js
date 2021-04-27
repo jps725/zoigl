@@ -1,4 +1,4 @@
-import AddBeerForm from "./AddBeerForm.js";
+import AddBeerForm from "./AddBeerForm";
 import React, { useState } from "react";
 import { Modal } from "../../context/Modal";
 
@@ -13,7 +13,7 @@ function AddBeerFormModal() {
       <button onClick={handleShowModal}>Add a Beer</button>
       {showModal && (
         <Modal onClose={handleCloseModal}>
-          <AddBeerForm />
+          <AddBeerForm onClose={handleCloseModal} />
         </Modal>
       )}
     </div>

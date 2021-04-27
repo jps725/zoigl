@@ -27,11 +27,10 @@ router.get(
 
 router.post(
   "/",
-  beerValidators,
   asyncHandler(async (req, res) => {
     const { name, style, status, ibus, userId, abv } = req.body;
     //userId?
-    const newBeer = await db.Beer.build({
+    const beer = await db.Beer.build({
       name,
       style,
       status,
@@ -43,9 +42,9 @@ router.post(
     const validationErrors = validationResult(req);
     if (validationErrors.isEmpty()) {
       {
-        await newBeer.save();
+        await beer.save();
 
-        return res.json({ newBeer });
+        return res.json({ beer });
       }
     } else {
       const errors = validationErrors.array().map((error) => error.msg);
