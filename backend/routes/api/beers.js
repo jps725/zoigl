@@ -3,6 +3,7 @@ const asyncHandler = require("express-async-handler");
 const router = express.Router();
 const db = require("../../db/models");
 const { check, validationResult } = require("express-validator");
+const { handleValidationErrors } = require("../../utils/validation");
 // const { setTokenCookie, requireAuth } = require("../../utils/auth");
 
 const beerValidators = [
@@ -14,6 +15,7 @@ const beerValidators = [
   check("style")
     .exists({ checkFalsy: true })
     .withMessage("Please select a style"),
+  handleValidationErrors,
 ];
 
 router.get(
@@ -25,11 +27,19 @@ router.get(
   })
 );
 
+router.get(
+  "/:id",
+  asyncHandler(async (req, res) => {
+    const beer = await db.Beer.findByPk(req.params.id);
+    return res.json({ beer });
+  })
+);
+
 router.post(
   "/",
+  beerValidators,
   asyncHandler(async (req, res) => {
     const { name, style, status, ibus, userId, abv } = req.body;
-    //userId?
     const beer = await db.Beer.build({
       name,
       style,
@@ -50,6 +60,23 @@ router.post(
       const errors = validationErrors.array().map((error) => error.msg);
       return res.json({ errors });
     }
+  })
+);
+
+const update = async (details) => {
+  const id = details.id;
+  delete details.id;
+  await db.Beer.update(details, { where: { id } });
+  return id;
+};
+
+router.put(
+  "/:id",
+  beerValidators,
+  asyncHandler(async (req, res) => {
+    const id = await update(req.body);
+    const beer = await db.Beer.findByPk(id);
+    return res.json(beer);
   })
 );
 

@@ -36,6 +36,20 @@ export const createBeer = (formData) => async (dispatch) => {
     return res;
   }
 };
+
+export const updateBeer = (formData) => async (dispatch) => {
+  console.log(formData);
+  const res = await csrfFetch(`/api/beers/${formData.id}`, {
+    method: "PUT",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(formData),
+  });
+  if (res.ok) {
+    const updatedBeer = await res.json();
+    dispatch(addBeer(updatedBeer.beer));
+    return updatedBeer;
+  }
+};
 const initialState = {};
 
 const beerReducer = (state = initialState, action) => {
@@ -51,13 +65,6 @@ const beerReducer = (state = initialState, action) => {
         ...state,
         beers: [...state.beers, action.beer],
       };
-      // const beerList = newState.beers.map((idx) => newState[idx]);
-      // beerList.push(action.beer);
-      // return newState;
-      // //  {
-      //   ...state,
-      //   beers: { ...state, [action.beer.id]: action.beer },
-      // };
     }
     default:
       return state;

@@ -1,18 +1,18 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import * as beerActions from "../../store/beers";
-import "./BeerForm.css";
+import "./EditBeerForm.css";
 
-const AddBeerForm = ({ onClose }) => {
+const EditBeerForm = ({ onClose, beer }) => {
   const dispatch = useDispatch();
   const userId = useSelector((state) => state.session.user.id);
-  const [name, setName] = useState("");
-  const [style, setStyle] = useState("");
-  const [status, setStatus] = useState("");
-  const [ibus, setIbus] = useState(0);
-  const [abv, setAbv] = useState(0);
+  //   const beer = useSelector((state) => state.beer)
+  const [name, setName] = useState(beer.name);
+  const [style, setStyle] = useState(beer.style);
+  const [status, setStatus] = useState(beer.status);
+  const [ibus, setIbus] = useState(beer.ibus);
+  const [abv, setAbv] = useState(beer.abv);
   const [errors, setErrors] = useState([]);
-
   const updateName = (e) => setName(e.target.value);
   const updateStyle = (e) => setStyle(e.target.value);
   const updateStatus = (e) => setStatus(e.target.value);
@@ -20,6 +20,8 @@ const AddBeerForm = ({ onClose }) => {
   const updateAbv = (e) => setAbv(e.target.value);
 
   // if (!userId) return alert("Must be signed in to do that");
+  const id = beer.id;
+
   const reset = () => {
     setName("");
     setStyle("");
@@ -28,21 +30,31 @@ const AddBeerForm = ({ onClose }) => {
     setAbv(0);
   };
 
+  const payload = {
+    ...beer,
+    name,
+    style,
+    status,
+    ibus,
+    abv,
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const beer = { name, style, status, ibus, abv, userId };
-    dispatch(beerActions.createBeer(beer)).catch(async (res) => {
-      const beerData = await res.json();
-      if (beerData && beerData.errors);
-      setErrors(beerData.errors);
-    });
+    // const beer = { id, name, style, status, ibus, abv, userId };
+    dispatch(beerActions.updateBeer(payload));
+    // .catch(async (res) => {
+    //   const beerData = await res.json();
+    //   if (beerData && beerData.errors);
+    //   setErrors(beerData.errors);
+    // });
     reset();
     onClose();
   };
 
   return (
-    <div className="form__addBeer">
-      <h1>Add New Beer</h1>
+    <div className="form__editBeer">
+      <h1>Update Beer</h1>
 
       {errors.length > 0 &&
         errors.map((error) => (
@@ -51,6 +63,7 @@ const AddBeerForm = ({ onClose }) => {
           </div>
         ))}
       <form onSubmit={handleSubmit}>
+        <input type="hidden" name="id" value={id} />
         <label>
           <input
             type="text"
@@ -98,10 +111,10 @@ const AddBeerForm = ({ onClose }) => {
             onChange={updateAbv}
           />
         </label>
-        <button type="submit">Add Beer</button>
+        <button type="submit">Update Beer</button>
       </form>
     </div>
   );
 };
 
-export default AddBeerForm;
+export default EditBeerForm;
