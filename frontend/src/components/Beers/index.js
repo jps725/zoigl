@@ -2,6 +2,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { useEffect } from "react";
 import { getBeers } from "../../store/beers";
 import AddBeerFormModal from "../AddBeerFormModal";
+import EditBeerFormModal from "../EditBeerFormModal";
 
 export default function Beers() {
   const dispatch = useDispatch();
@@ -11,9 +12,11 @@ export default function Beers() {
   }, [dispatch]);
 
   const beers = useSelector((state) => {
-    return state.beer.beers?.map((beer) => (
+    const beerList = Object.values(state.beer);
+    return beerList?.map((beer) => (
       <div key={beer.id}>
         <h2>{beer.name}</h2>
+        <EditBeerFormModal beer={beer} />
         <div>
           <div>{beer.style}</div>
           <div>{beer.status}</div>
