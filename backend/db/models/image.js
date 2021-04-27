@@ -6,25 +6,16 @@ module.exports = (sequelize, DataTypes) => {
     {
       userId: {
         type: DataTypes.INTEGER,
-        allowNull: false,
         references: { model: "Users" },
       },
 
       beerId: {
         type: DataTypes.INTEGER,
-        allowNull: false,
         references: { model: "Beers" },
       },
       imageUrl: {
         type: DataTypes.STRING,
         allowNull: false,
-      },
-      imageType: {
-        type: DataTypes.STRING,
-        allowNull: false,
-        validate: {
-          len: [3, 25],
-        },
       },
     },
     {}

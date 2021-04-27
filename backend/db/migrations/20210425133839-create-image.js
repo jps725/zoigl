@@ -10,20 +10,14 @@ module.exports = {
       },
       userId: {
         type: Sequelize.INTEGER,
-        allowNull: false,
         references: { model: "Users" },
       },
       beerId: {
         type: Sequelize.INTEGER,
         references: { model: "Beers" },
-        allowNull: false,
       },
       imageUrl: {
         type: Sequelize.STRING,
-        allowNull: false,
-      },
-      imageType: {
-        type: Sequelize.STRING(25),
         allowNull: false,
       },
       createdAt: {
