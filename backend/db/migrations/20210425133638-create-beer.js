@@ -27,6 +27,14 @@ module.exports = {
         type: Sequelize.STRING(25),
         allowNull: false,
       },
+      ibus: {
+        type: Sequelize.INTEGER,
+        allowNull: false,
+      },
+      abv: {
+        type: Sequelize.INTEGER,
+        allowNull: false,
+      },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE,

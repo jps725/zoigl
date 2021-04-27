@@ -38,11 +38,12 @@ export const restoreUser = () => async (dispatch) => {
 };
 
 export const signupUser = (user) => async (dispatch) => {
-  const { images, image, username, email, password } = user;
+  const { images, image, username, email, password, breweryName } = user;
   const formData = new FormData();
   formData.append("username", username);
   formData.append("email", email);
   formData.append("password", password);
+  formData.append("breweryName", breweryName);
 
   // for multiple files
   if (images && images.length !== 0) {

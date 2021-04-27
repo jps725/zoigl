@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import * as sessionActions from "../../store/session";
 import { useDispatch, useSelector } from "react-redux";
 // import { Redirect } from "react-router-dom";
+// import { useHistory } from "react-router-dom";
 
 const SignupForm = () => {
   const dispatch = useDispatch();
@@ -14,12 +15,13 @@ const SignupForm = () => {
   const [confirmPassword, setConfirmPassword] = useState("");
   const [errors, setErrors] = useState([]);
   const [image, setImage] = useState(null);
+  const [breweryName, setBreweryName] = useState("");
 
   const updateUsername = (e) => setUsername(e.target.value);
   const updateEmail = (e) => setEmail(e.target.value);
   const updatePassword = (e) => setPassword(e.target.value);
   const updateConfirmPassword = (e) => setConfirmPassword(e.target.value);
-
+  const updateBreweryName = (e) => setBreweryName(e.target.value);
   // if (sessionUser) return <Redirect to="/" />;
   const reset = () => {
     setUsername("");
@@ -27,6 +29,7 @@ const SignupForm = () => {
     setPassword("");
     setConfirmPassword("");
     setImage(null);
+    setBreweryName("");
   };
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -34,7 +37,15 @@ const SignupForm = () => {
       return setErrors(["Passwords must match"]);
     }
     let errors = [];
-    dispatch(sessionActions.signupUser({ username, email, password, image }))
+    dispatch(
+      sessionActions.signupUser({
+        username,
+        email,
+        password,
+        image,
+        breweryName,
+      })
+    )
       .then(reset())
       .catch(async (res) => {
         const userData = await res.json();
@@ -60,12 +71,11 @@ const SignupForm = () => {
             {error}
           </div>
         ))}
-
       <form onSubmit={handleSubmit}>
         <label>
           <input
             type="text"
-            placeholder="username"
+            placeholder="Username"
             required
             value={username}
             onChange={updateUsername}
@@ -74,7 +84,7 @@ const SignupForm = () => {
         <label>
           <input
             type="email"
-            placeholder="email"
+            placeholder="Email"
             required
             value={email}
             onChange={updateEmail}
@@ -82,8 +92,16 @@ const SignupForm = () => {
         </label>
         <label>
           <input
+            type="text"
+            placeholder="Brewery Name"
+            value={breweryName}
+            onChange={updateBreweryName}
+          />
+        </label>
+        <label>
+          <input
             type="password"
-            placeholder="password"
+            placeholder="Password"
             required
             value={password}
             onChange={updatePassword}
@@ -92,7 +110,7 @@ const SignupForm = () => {
         <label>
           <input
             type="password"
-            placeholder="confirm password"
+            placeholder="Confirm Password"
             required
             value={confirmPassword}
             onChange={updateConfirmPassword}

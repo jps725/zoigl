@@ -25,6 +25,9 @@ const validateSignup = [
     .exists({ checkFalsy: true })
     .isLength({ min: 6 })
     .withMessage("Password must be 6 characters or more."),
+  check("breweryName")
+    .isLength({ min: 5 })
+    .withMessage("Brewery Name must be more than 5 characters"),
   handleValidationErrors,
 ];
 
@@ -33,13 +36,16 @@ router.post(
   singleMulterUpload("image"),
   validateSignup,
   asyncHandler(async (req, res) => {
-    const { email, password, username } = req.body;
+    const { email, password, username, breweryName } = req.body;
+
     const profileImageUrl = await singlePublicFileUpload(req.file);
+
     const user = await User.signup({
       username,
       email,
       password,
       profileImageUrl,
+      breweryName,
     });
 
     setTokenCookie(res, user);
