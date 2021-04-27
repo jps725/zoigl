@@ -1,4 +1,4 @@
-import { csrfFetch } from "./csrf";
+// import { csrfFetch } from "./csrf";
 
 const LOAD = "beers/LOAD";
 const ADD_ONE = "beers/ADD_ONE";
@@ -16,7 +16,7 @@ const addBeer = (beer) => ({
 });
 
 export const getBeers = () => async (dispatch) => {
-  const res = await csrfFetch("/api/beers");
+  const res = await fetch("/api/beers");
 
   if (res.ok) {
     const beerList = await res.json();
@@ -25,7 +25,7 @@ export const getBeers = () => async (dispatch) => {
 };
 
 export const createBeer = (formData) => async (dispatch) => {
-  const res = await csrfFetch("/api/beers", {
+  const res = await fetch("/api/beers", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(formData),
@@ -49,7 +49,7 @@ const beerReducer = (state = initialState, action) => {
     case ADD_ONE: {
       return {
         ...state,
-        ...action.beerList,
+        beers: action.beer,
       };
     }
     default:

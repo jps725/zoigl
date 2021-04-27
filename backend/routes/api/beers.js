@@ -3,6 +3,7 @@ const asyncHandler = require("express-async-handler");
 const router = express.Router();
 const db = require("../../db/models");
 const { check, validationResult } = require("express-validator");
+// const { setTokenCookie, requireAuth } = require("../../utils/auth");
 
 const beerValidators = [
   check("name")
@@ -43,11 +44,12 @@ router.post(
     if (validationErrors.isEmpty()) {
       {
         await newBeer.save();
-        res.json({ newBeer });
+
+        return res.json({ newBeer });
       }
     } else {
       const errors = validationErrors.array().map((error) => error.msg);
-      res.json({ errors });
+      return res.json({ errors });
     }
   })
 );

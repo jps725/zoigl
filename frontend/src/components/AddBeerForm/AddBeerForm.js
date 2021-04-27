@@ -1,12 +1,13 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 import { useDispatch, useSelector } from "react-redux";
 import * as beerActions from "../../store/beers";
+import { useHistory } from "react-router-dom";
 
 const AddBeerForm = () => {
   const dispatch = useDispatch();
   const userId = useSelector((state) => state.session.user.id);
-
+  const history = useHistory();
   const [beerName, setBeerName] = useState("");
   const [style, setStyle] = useState("");
   const [status, setStatus] = useState("");
@@ -20,33 +21,31 @@ const AddBeerForm = () => {
   const updateIbus = (e) => setIbus(e.target.value);
   const updateAbv = (e) => setAbv(e.target.value);
   if (!userId) return alert("Must be signed in to do that");
-  const reset = () => {
-    setBeerName("");
-    setStyle("");
-    setStatus("");
-    setIbus(0);
-    setAbv(0);
-  };
+  // const reset = () => {
+  //   setBeerName("");
+  //   setStyle("");
+  //   setStatus("");
+  //   setIbus(0);
+  //   setAbv(0);
+  // };
 
-  const handleSubmit = (e) => {
+  // useEffect(() => {
+  //   dispatch(beerActions.getBeers());
+  // }, [dispatch]);
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    let errors = [];
-    dispatch(
-      beerActions.createBeer({
-        beerName,
-        style,
-        status,
-        ibus,
-        abv,
-        userId,
-      })
-    )
-      .then(reset())
-      .catch(async (res) => {
-        const beerData = await res.json();
-        if (beerData && beerData.errors);
-        setErrors(errors);
-      });
+    const beer = { beerName, style, status, ibus, abv, userId };
+    let newBeer = await dispatch(beerActions.createBeer(beer));
+    if (newBeer) {
+      history.push("/beers");
+    }
+    // .then(reset())
+    // .catch(async (res) => {
+    //   const beerData = await res.json();
+    //   if (beerData && beerData.errors);
+    //   setErrors(errors);
+    // });
   };
 
   return (
