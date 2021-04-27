@@ -1,3 +1,4 @@
+import "./index.css";
 import AddBeerForm from "./AddBeerForm";
 import React, { useState } from "react";
 import { Modal } from "../../context/Modal";

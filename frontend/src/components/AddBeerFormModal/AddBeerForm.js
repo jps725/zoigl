@@ -1,13 +1,11 @@
-import React, { useState, useEffect } from "react";
-
+import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import * as beerActions from "../../store/beers";
-import { useHistory } from "react-router-dom";
+import "./BeerForm.css";
 
 const AddBeerForm = ({ onClose }) => {
   const dispatch = useDispatch();
   const userId = useSelector((state) => state.session.user.id);
-  const history = useHistory();
   const [name, setName] = useState("");
   const [style, setStyle] = useState("");
   const [status, setStatus] = useState("");
@@ -44,7 +42,7 @@ const AddBeerForm = ({ onClose }) => {
   };
 
   return (
-    <div>
+    <div className="form__addBeer">
       <h1>Add New Beer</h1>
 
       {errors.length > 0 &&

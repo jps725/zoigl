@@ -22,7 +22,12 @@ input {
   width: 15em;
 }
 button {
-  margin: 1em;
-  border-radius: 2px;
-  box-shadow: 2px 2px 1px 1px rgba(0, 0, 0, 0.3);
+  border-radius: 4px;
+  color: black;
+  outline: none;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+  text-decoration: none;
+  padding: 0.25em;
+  font-family: "Maven Pro", sans-serif;
 }

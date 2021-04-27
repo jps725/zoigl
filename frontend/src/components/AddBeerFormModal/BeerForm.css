@@ -1,4 +1,4 @@
-.form__signup {
+.form__addBeer {
   width: fit-content;
   margin: 0 auto;
   position: relative;
@@ -14,11 +14,6 @@ form {
   flex-direction: column;
   align-items: center;
   border-radius: 3px;
-  /*
-  blur
-   box-shadow: inset 0 0 0 200px rgba(255,255,255,0.05);
- filter: blur(10px);;
-  */
 }
 input {
   margin: 1em;
