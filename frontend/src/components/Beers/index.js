@@ -12,7 +12,8 @@ export default function Beers() {
   }, [dispatch]);
 
   const beers = useSelector((state) => {
-    return state.beer.beers?.map((beer) => (
+    const beerList = Object.values(state.beer);
+    return beerList?.map((beer) => (
       <div key={beer.id}>
         <h2>{beer.name}</h2>
         <EditBeerFormModal beer={beer} />
