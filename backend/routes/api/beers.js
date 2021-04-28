@@ -87,9 +87,9 @@ router.put(
   "/:id",
   beerValidators,
   asyncHandler(async (req, res) => {
-    console.log;
+    console.log("put route");
     const { name, style, status, ibus, userId, abv, id } = req.body;
-    const beerImageUrl = await singlePublicFileUpload(req.bodyFile.file);
+    const beerImageUrl = await singlePublicFileUpload(req.file);
     const beer = await db.Beer.findByPk(id);
 
     const validationErrors = validationResult(req);

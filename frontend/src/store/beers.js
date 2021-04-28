@@ -71,19 +71,18 @@ export const updateBeer = (beer) => async (dispatch) => {
   //   dispatch(editBeer(updatedBeer));
   //   return updatedBeer;
   // }
-  const { name, style, status, ibus, abv, userId, beerImageUrl } = beer;
-
+  const { name, style, status, ibus, abv, beerImageUrl, id } = beer;
   const formData = new FormData();
   formData.append("name", name);
   formData.append("style", style);
   formData.append("status", status);
   formData.append("ibus", ibus);
   formData.append("abv", abv);
-  formData.append("userID", userId);
+  // formData.append("userId", userId);
 
   if (beerImageUrl) formData.append("beerImageUrl", beerImageUrl);
 
-  const res = await csrfFetch(`/api/beers/${beer.id}`, {
+  const res = await csrfFetch(`/api/beers/${id}`, {
     method: "PUT",
     headers: { "Content-Type": "multipart/form-data" },
     body: formData,
