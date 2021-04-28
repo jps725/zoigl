@@ -29,7 +29,8 @@ export default function Beers() {
           <div>{beer.style}</div>
           <div>{beer.status}</div>
           <div>{beer.ibus}</div>
-          <div>{beer.abv}</div>
+          <div>{beer.abv}%</div>
+          <div>{beer.beerImageUrl}</div>
         </div>
       </div>
     ));

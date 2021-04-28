@@ -4,6 +4,7 @@ const router = express.Router();
 const db = require("../../db/models");
 const { check, validationResult } = require("express-validator");
 const { handleValidationErrors } = require("../../utils/validation");
+const { singlePublicFileUpload, singleMulterUpload } = require("../../awsS3");
 // const { setTokenCookie, requireAuth } = require("../../utils/auth");
 
 const beerValidators = [
@@ -15,6 +16,15 @@ const beerValidators = [
   check("style")
     .exists({ checkFalsy: true })
     .withMessage("Please select a style"),
+  check("status")
+    .exists({ checkFalsy: true })
+    .withMessage("Please select a status"),
+  check("abv")
+    .exists({ checkFalsy: true })
+    .withMessage("Please provide a value for abv"),
+  check("ibus")
+    .exists({ checkFalsy: true })
+    .withMessage("Please provide a value for ibus"),
   handleValidationErrors,
 ];
 
@@ -40,6 +50,7 @@ router.post(
   beerValidators,
   asyncHandler(async (req, res) => {
     const { name, style, status, ibus, userId, abv } = req.body;
+    const beerImageUrl = await singlePublicFileUpload(req.file);
     const beer = await db.Beer.build({
       name,
       style,
@@ -47,13 +58,13 @@ router.post(
       userId,
       abv,
       ibus,
+      beerImageUrl,
     });
 
     const validationErrors = validationResult(req);
     if (validationErrors.isEmpty()) {
       {
         await beer.save();
-
         return res.json({ beer });
       }
     } else {

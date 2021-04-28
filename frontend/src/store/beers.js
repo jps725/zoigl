@@ -37,11 +37,22 @@ export const getBeers = () => async (dispatch) => {
   }
 };
 
-export const createBeer = (formData) => async (dispatch) => {
+export const createBeer = (beer) => async (dispatch) => {
+  const { name, style, status, ibus, abv, userId, image } = beer;
+  const formData = new FormData();
+  formData.append("name", name);
+  formData.append("style", style);
+  formData.append("status", status);
+  formData.append("ibus", ibus);
+  formData.append("abv", abv);
+  formData.append("userID", userId);
+
+  if (image) formData.append("image", image);
+
   const res = await csrfFetch("/api/beers", {
     method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify(formData),
+    headers: { "Content-Type": "multipart/form-data" },
+    body: formData,
   });
   if (res.ok) {
     const newBeer = await res.json();
@@ -50,11 +61,22 @@ export const createBeer = (formData) => async (dispatch) => {
   }
 };
 
-export const updateBeer = (formData) => async (dispatch) => {
+export const updateBeer = (beer) => async (dispatch) => {
+  const { name, style, status, ibus, abv, userId, image } = beer;
+  const formData = new FormData();
+  formData.append("name", name);
+  formData.append("style", style);
+  formData.append("status", status);
+  formData.append("ibus", ibus);
+  formData.append("abv", abv);
+  formData.append("userID", userId);
+
+  if (image) formData.append("image", image);
+
   const res = await csrfFetch(`/api/beers/${formData.id}`, {
     method: "PUT",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify(formData),
+    headers: { "Content-Type": "multipart/form-data" },
+    body: formData,
   });
   if (res.ok) {
     const updatedBeer = await res.json();

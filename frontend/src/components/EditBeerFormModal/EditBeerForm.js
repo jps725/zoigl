@@ -12,6 +12,7 @@ const EditBeerForm = ({ onClose, beer }) => {
   const [status, setStatus] = useState(beer.status);
   const [ibus, setIbus] = useState(beer.ibus);
   const [abv, setAbv] = useState(beer.abv);
+  const [image, setImage] = useState(beer.beerImageUrl);
   const [errors, setErrors] = useState([]);
   const updateName = (e) => setName(e.target.value);
   const updateStyle = (e) => setStyle(e.target.value);
@@ -22,14 +23,6 @@ const EditBeerForm = ({ onClose, beer }) => {
   // if (!userId) return alert("Must be signed in to do that");
   const id = beer.id;
 
-  const reset = () => {
-    setName("");
-    setStyle("");
-    setStatus("");
-    setIbus(0);
-    setAbv(0);
-  };
-
   const payload = {
     ...beer,
     name,
@@ -38,20 +31,25 @@ const EditBeerForm = ({ onClose, beer }) => {
     ibus,
     abv,
     userId,
+    image,
     //added userId - see if still works?
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    // const beer = { id, name, style, status, ibus, abv, userId };
-    dispatch(beerActions.updateBeer(payload));
-    // .catch(async (res) => {
-    //   const beerData = await res.json();
-    //   if (beerData && beerData.errors);
-    //   setErrors(beerData.errors);
-    // });
-    reset();
+
+    dispatch(beerActions.updateBeer(payload)).catch(async (res) => {
+      const beerData = await res.json();
+      if (beerData && beerData.errors);
+      setErrors(beerData.errors);
+    });
+
     onClose();
+  };
+
+  const updateFile = (e) => {
+    const file = e.target.files[0];
+    if (file) setImage(file);
   };
 
   return (
@@ -112,6 +110,10 @@ const EditBeerForm = ({ onClose, beer }) => {
             value={abv}
             onChange={updateAbv}
           />
+          %
+        </label>
+        <label>
+          <input type="file" value={image} onChange={updateFile} />
         </label>
         <button type="submit">Update Beer</button>
       </form>
