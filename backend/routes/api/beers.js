@@ -86,7 +86,7 @@ const update = async (details) => {
   return id;
 };
 
-router.post(
+router.put(
   "/:id",
   beerValidators,
   asyncHandler(async (req, res) => {

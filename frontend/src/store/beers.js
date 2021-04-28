@@ -95,22 +95,28 @@ export const updateBeer = (beer) => async (dispatch) => {
   // }
   const { name, style, status, ibus, abv, userId, image, id } = beer;
   const formData = new FormData();
-  formData.append("name", name);
-  formData.append("style", style);
-  formData.append("status", status);
-  formData.append("ibus", ibus);
-  formData.append("abv", abv);
-  formData.append("userId", userId);
+  // formData.append("name", name);
+  // formData.append("style", style);
+  // formData.append("status", status);
+  // formData.append("ibus", ibus);
+  // formData.append("abv", abv);
+  // formData.append("userId", userId);
+  let beerImg;
 
-  if (image) formData.append("image", image);
+  // if (image) {
+  //   formData.append("image", image);
+  //   beerImg = await dispatch(editImageForm(formData));
+  //   /// new thunk create new backend route
+  // }
 
   const res = await csrfFetch(`/api/beers/${id}`, {
-    method: "POST",
+    method: "PUT",
     headers: { "Content-Type": "application/json" },
-    body: beer,
+    body: JSON.stringify(beer),
   });
   if (res.ok) {
     const newBeer = await res.json();
+    // dispatch(editBeer({ newBeer: newBeer.beer, ...beerImg }));
     dispatch(editBeer(newBeer.beer));
     return res;
   }
