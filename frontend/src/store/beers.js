@@ -32,7 +32,6 @@ export const getBeers = () => async (dispatch) => {
 
   if (res.ok) {
     const { beers } = await res.json();
-    console.log(beers);
     dispatch(load(beers));
   }
 };
@@ -62,7 +61,18 @@ export const createBeer = (beer) => async (dispatch) => {
 };
 
 export const updateBeer = (beer) => async (dispatch) => {
-  const { name, style, status, ibus, abv, userId, image } = beer;
+  // const res = await csrfFetch(`/api/beers/${formData.id}`, {
+  //   method: "PUT",
+  //   headers: { "Content-Type": "application/json" },
+  //   body: JSON.stringify(formData),
+  // });
+  // if (res.ok) {
+  //   const updatedBeer = await res.json();
+  //   dispatch(editBeer(updatedBeer));
+  //   return updatedBeer;
+  // }
+  const { name, style, status, ibus, abv, userId, beerImageUrl } = beer;
+
   const formData = new FormData();
   formData.append("name", name);
   formData.append("style", style);
@@ -71,13 +81,14 @@ export const updateBeer = (beer) => async (dispatch) => {
   formData.append("abv", abv);
   formData.append("userID", userId);
 
-  if (image) formData.append("image", image);
+  if (beerImageUrl) formData.append("beerImageUrl", beerImageUrl);
 
-  const res = await csrfFetch(`/api/beers/${formData.id}`, {
+  const res = await csrfFetch(`/api/beers/${beer.id}`, {
     method: "PUT",
     headers: { "Content-Type": "multipart/form-data" },
     body: formData,
   });
+
   if (res.ok) {
     const updatedBeer = await res.json();
     dispatch(editBeer(updatedBeer));

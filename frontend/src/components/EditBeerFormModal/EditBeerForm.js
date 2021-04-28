@@ -12,7 +12,7 @@ const EditBeerForm = ({ onClose, beer }) => {
   const [status, setStatus] = useState(beer.status);
   const [ibus, setIbus] = useState(beer.ibus);
   const [abv, setAbv] = useState(beer.abv);
-  const [image, setImage] = useState(beer.beerImageUrl);
+  const [beerImageUrl, setBeerImageUrl] = useState(beer.beerImageUrl);
   const [errors, setErrors] = useState([]);
   const updateName = (e) => setName(e.target.value);
   const updateStyle = (e) => setStyle(e.target.value);
@@ -24,20 +24,19 @@ const EditBeerForm = ({ onClose, beer }) => {
   const id = beer.id;
 
   const payload = {
-    ...beer,
     name,
     style,
     status,
     ibus,
     abv,
     userId,
-    image,
+    beerImageUrl,
+    id,
     //added userId - see if still works?
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
     dispatch(beerActions.updateBeer(payload)).catch(async (res) => {
       const beerData = await res.json();
       if (beerData && beerData.errors);
@@ -49,7 +48,7 @@ const EditBeerForm = ({ onClose, beer }) => {
 
   const updateFile = (e) => {
     const file = e.target.files[0];
-    if (file) setImage(file);
+    if (file) setBeerImageUrl(file);
   };
 
   return (
@@ -113,7 +112,7 @@ const EditBeerForm = ({ onClose, beer }) => {
           %
         </label>
         <label>
-          <input type="file" value={image} onChange={updateFile} />
+          <input type="file" onChange={updateFile} />
         </label>
         <button type="submit">Update Beer</button>
       </form>

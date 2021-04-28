@@ -87,9 +87,38 @@ router.put(
   "/:id",
   beerValidators,
   asyncHandler(async (req, res) => {
-    const id = await update(req.body);
+    console.log;
+    const { name, style, status, ibus, userId, abv, id } = req.body;
+    const beerImageUrl = await singlePublicFileUpload(req.bodyFile.file);
     const beer = await db.Beer.findByPk(id);
-    return res.json(beer);
+
+    const validationErrors = validationResult(req);
+    if (!validationErrors.isEmpty()) {
+      const errors = validatorErrors.array().map((error) => error.msg);
+      res.json({ errors });
+      return;
+    }
+
+    if (beer) {
+      beer.name = name;
+      beer.style = style;
+      beer.status = status;
+      beer.userId = userId;
+      beer.abv = abv;
+      beer.ibus = ibus;
+      beer.beerImageUrl = beerImageUrl;
+      await beer.save();
+      res.json({ beer });
+    } else {
+      const error = new Error(`Beer ${id} not found!`);
+      error.status = 404;
+      error.title = "Beer not found";
+      res.json({ error });
+    }
+
+    // const id = await update(req.body);
+    // const beer = await db.Beer.findByPk(id);
+    // return res.json(beer);
   })
 );
 
