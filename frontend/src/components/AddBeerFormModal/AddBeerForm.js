@@ -19,7 +19,7 @@ const AddBeerForm = ({ onClose }) => {
   const updateIbus = (e) => setIbus(e.target.value);
   const updateAbv = (e) => setAbv(e.target.value);
 
-  // if (!userId) return alert("Must be signed in to do that");
+  if (!userId) return alert("Must be signed in to do that");
   const reset = () => {
     setName("");
     setStyle("");
