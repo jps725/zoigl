@@ -86,11 +86,12 @@ const update = async (details) => {
   return id;
 };
 
-router.put(
+router.post(
   "/:id",
   beerValidators,
   asyncHandler(async (req, res) => {
     const { name, style, status, ibus, userId, abv, id } = req.body;
+    console.log("request", req.body);
     let beerImageUrl;
     if (req.file) {
       beerImageUrl = await singlePublicFileUpload(req.file);
