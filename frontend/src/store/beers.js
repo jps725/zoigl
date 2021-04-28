@@ -3,6 +3,7 @@ import { csrfFetch } from "./csrf";
 const LOAD = "beers/LOAD";
 const ADD_ONE = "beers/ADD_ONE";
 const UPDATE_ONE = "beers/UPDATE_ONE";
+const REMOVE_ONE = "beers/REMOVE_ONE";
 
 const load = (beerList) => {
   return {
@@ -19,6 +20,11 @@ const addBeer = (beer) => ({
 const editBeer = (beer) => ({
   type: UPDATE_ONE,
   beer,
+});
+
+const removeBeer = (beerId) => ({
+  type: REMOVE_ONE,
+  beerId,
 });
 
 export const getBeers = () => async (dispatch) => {
@@ -45,7 +51,6 @@ export const createBeer = (formData) => async (dispatch) => {
 };
 
 export const updateBeer = (formData) => async (dispatch) => {
-  console.log(formData);
   const res = await csrfFetch(`/api/beers/${formData.id}`, {
     method: "PUT",
     headers: { "Content-Type": "application/json" },
@@ -53,10 +58,17 @@ export const updateBeer = (formData) => async (dispatch) => {
   });
   if (res.ok) {
     const updatedBeer = await res.json();
-    console.log("update", updatedBeer);
     dispatch(editBeer(updatedBeer));
     return updatedBeer;
   }
+};
+
+export const deleteBeer = (beerId) => async (dispatch) => {
+  await csrfFetch(`api/beers/${beerId}`, {
+    method: "DELETE",
+  });
+  dispatch(removeBeer(beerId));
+  return;
 };
 const initialState = {};
 
@@ -80,6 +92,11 @@ const beerReducer = (state = initialState, action) => {
         ...state,
         [action.beer.id]: action.beer,
       };
+    }
+    case REMOVE_ONE: {
+      const newState = { ...state };
+      delete newState[action.beerId];
+      return newState;
     }
 
     default:

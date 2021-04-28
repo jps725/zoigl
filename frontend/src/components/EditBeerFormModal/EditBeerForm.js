@@ -37,6 +37,8 @@ const EditBeerForm = ({ onClose, beer }) => {
     status,
     ibus,
     abv,
+    userId,
+    //added userId - see if still works?
   };
 
   const handleSubmit = async (e) => {

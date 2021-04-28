@@ -80,4 +80,20 @@ router.put(
   })
 );
 
+const remove = async (id) => {
+  const beer = await db.Beer.findByPk(id);
+  if (!beer) throw new Error("Can't find that beer");
+
+  await db.Beer.destroy({ where: { id: beer.id } });
+  return beer.id;
+};
+
+router.delete(
+  "/:id",
+  asyncHandler(async (req, res) => {
+    const beerId = await remove(req.params.id);
+    return res.json({ beerId });
+  })
+);
+
 module.exports = router;
