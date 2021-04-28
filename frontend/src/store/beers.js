@@ -45,7 +45,7 @@ export const createBeer = (beer) => async (dispatch) => {
   formData.append("status", status);
   formData.append("ibus", ibus);
   formData.append("abv", abv);
-  formData.append("userID", userId);
+  formData.append("userId", userId);
 
   if (image) formData.append("image", image);
 

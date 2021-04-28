@@ -47,7 +47,7 @@ module.exports = (sequelize, DataTypes) => {
           max: [200],
         },
       },
-      profileImageUrl: {
+      beerImageUrl: {
         type: DataTypes.STRING,
       },
     },

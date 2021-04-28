@@ -5,6 +5,7 @@ const db = require("../../db/models");
 const { check, validationResult } = require("express-validator");
 const { handleValidationErrors } = require("../../utils/validation");
 const { singlePublicFileUpload, singleMulterUpload } = require("../../awsS3");
+const { setTokenCookie } = require("../../utils/auth");
 // const { setTokenCookie, requireAuth } = require("../../utils/auth");
 
 const beerValidators = [
@@ -47,6 +48,7 @@ router.get(
 
 router.post(
   "/",
+  singleMulterUpload("image"),
   beerValidators,
   asyncHandler(async (req, res) => {
     const { name, style, status, ibus, userId, abv } = req.body;

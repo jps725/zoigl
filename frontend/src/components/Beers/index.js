@@ -4,6 +4,7 @@ import { getBeers } from "../../store/beers";
 import AddBeerFormModal from "../AddBeerFormModal";
 import EditBeerFormModal from "../EditBeerFormModal";
 import * as beerActions from "../../store/beers";
+import "./index.css";
 
 export default function Beers() {
   const dispatch = useDispatch();
@@ -30,7 +31,11 @@ export default function Beers() {
           <div>{beer.status}</div>
           <div>{beer.ibus}</div>
           <div>{beer.abv}%</div>
-          <div>{beer.beerImageUrl}</div>
+          <img
+            className="beerLogo__img"
+            alt="beer logo"
+            src={beer.beerImageUrl}
+          />
         </div>
       </div>
     ));

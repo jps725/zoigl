@@ -7,7 +7,7 @@
   transition: all 0.2s ease-in-out;
   order: -1;
 }
-img {
+.profile__img {
   width: 5em;
   border-radius: 50%;
 }
