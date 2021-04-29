@@ -10,7 +10,7 @@ export default function Profile() {
     <div>
       <div className="profile__info">
         <h1>Welcome {user.username}</h1>
-        <img src={user.profileImageUrl} alt="profile" />
+        {/* <img src={user.profileImageUrl} alt="profile" /> */}
         <div>Brewery: {user.breweryName}</div>
       </div>
       <Beers />

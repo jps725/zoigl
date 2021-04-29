@@ -12,6 +12,7 @@ const EditBeerForm = ({ onClose, beer }) => {
   const [status, setStatus] = useState(beer.status);
   const [ibus, setIbus] = useState(beer.ibus);
   const [abv, setAbv] = useState(beer.abv);
+  const [image, setImage] = useState(beer.beerImageUrl);
   const [errors, setErrors] = useState([]);
   const updateName = (e) => setName(e.target.value);
   const updateStyle = (e) => setStyle(e.target.value);
@@ -22,36 +23,32 @@ const EditBeerForm = ({ onClose, beer }) => {
   // if (!userId) return alert("Must be signed in to do that");
   const id = beer.id;
 
-  const reset = () => {
-    setName("");
-    setStyle("");
-    setStatus("");
-    setIbus(0);
-    setAbv(0);
-  };
-
-  const payload = {
-    ...beer,
-    name,
-    style,
-    status,
-    ibus,
-    abv,
-    userId,
-    //added userId - see if still works?
-  };
-
-  const handleSubmit = async (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
-    // const beer = { id, name, style, status, ibus, abv, userId };
+    const payload = {
+      name,
+      style,
+      status,
+      ibus,
+      abv,
+      userId,
+      image,
+      id,
+      //added userId - see if still works?
+    };
     dispatch(beerActions.updateBeer(payload));
     // .catch(async (res) => {
     //   const beerData = await res.json();
     //   if (beerData && beerData.errors);
     //   setErrors(beerData.errors);
     // });
-    reset();
+
     onClose();
+  };
+
+  const updateFile = (e) => {
+    const file = e.target.files[0];
+    if (file) setImage(file);
   };
 
   return (
@@ -65,7 +62,6 @@ const EditBeerForm = ({ onClose, beer }) => {
           </div>
         ))}
       <form onSubmit={handleSubmit}>
-        <input type="hidden" name="id" value={id} />
         <label>
           <input
             type="text"
@@ -112,6 +108,10 @@ const EditBeerForm = ({ onClose, beer }) => {
             value={abv}
             onChange={updateAbv}
           />
+          %
+        </label>
+        <label>
+          <input type="file" onChange={updateFile} />
         </label>
         <button type="submit">Update Beer</button>
       </form>
