@@ -2,8 +2,6 @@ import "./SignupForm.css";
 import React, { useState } from "react";
 import * as sessionActions from "../../store/session";
 import { useDispatch, useSelector } from "react-redux";
-// import { Redirect } from "react-router-dom";
-// import { useHistory } from "react-router-dom";
 
 const SignupForm = () => {
   const dispatch = useDispatch();
@@ -22,7 +20,7 @@ const SignupForm = () => {
   const updatePassword = (e) => setPassword(e.target.value);
   const updateConfirmPassword = (e) => setConfirmPassword(e.target.value);
   const updateBreweryName = (e) => setBreweryName(e.target.value);
-  // if (sessionUser) return <Redirect to="/" />;
+
   const reset = () => {
     setUsername("");
     setEmail("");

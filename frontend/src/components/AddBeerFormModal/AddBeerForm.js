@@ -11,6 +11,7 @@ const AddBeerForm = ({ onClose }) => {
   const [status, setStatus] = useState("");
   const [ibus, setIbus] = useState(0);
   const [abv, setAbv] = useState(0);
+  const [image, setImage] = useState(null);
   const [errors, setErrors] = useState([]);
 
   const updateName = (e) => setName(e.target.value);
@@ -26,11 +27,13 @@ const AddBeerForm = ({ onClose }) => {
     setStatus("");
     setIbus(0);
     setAbv(0);
+    setImage(null);
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const beer = { name, style, status, ibus, abv, userId };
+
+    const beer = { name, style, status, ibus, abv, userId, image };
     dispatch(beerActions.createBeer(beer)).catch(async (res) => {
       const beerData = await res.json();
       if (beerData && beerData.errors);
@@ -38,6 +41,11 @@ const AddBeerForm = ({ onClose }) => {
     });
     reset();
     onClose();
+  };
+
+  const updateFile = (e) => {
+    const file = e.target.files[0];
+    if (file) setImage(file);
   };
 
   return (
@@ -97,6 +105,10 @@ const AddBeerForm = ({ onClose }) => {
             value={abv}
             onChange={updateAbv}
           />
+          %
+        </label>
+        <label>
+          <input type="file" onChange={updateFile} />
         </label>
         <button type="submit">Add Beer</button>
       </form>
