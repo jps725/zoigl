@@ -22,10 +22,6 @@ module.exports = {
       review: {
         type: Sequelize.STRING,
       },
-      checkin: {
-        type: Sequelize.BOOLEAN,
-        default: false,
-      },
       rating: {
         type: Sequelize.INTEGER,
         allowNull: false,

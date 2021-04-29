@@ -35,6 +35,9 @@ module.exports = {
         type: Sequelize.INTEGER,
         allowNull: false,
       },
+      beerImageUrl: {
+        type: Sequelize.STRING,
+      },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE,

@@ -19,6 +19,7 @@ module.exports = {
           status: "On Tap",
           abv: 8.4,
           ibus: 91,
+          beerImageUrl: "https://zoiglawsbucket.s3.amazonaws.com/cheers.jpeg",
         },
         {
           name: "Spring into Saison",
@@ -27,6 +28,7 @@ module.exports = {
           status: "Bottled",
           abv: 6.1,
           ibus: 37,
+          beerImageUrl: "https://zoiglawsbucket.s3.amazonaws.com/cheers.jpeg",
         },
         {
           name: "Midnight Moonlight",
@@ -35,6 +37,7 @@ module.exports = {
           status: "Cellared",
           abv: 9.1,
           ibus: 43,
+          beerImageUrl: "https://zoiglawsbucket.s3.amazonaws.com/cheers.jpeg",
         },
       ],
       {}

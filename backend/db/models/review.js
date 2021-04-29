@@ -17,7 +17,7 @@ module.exports = (sequelize, DataTypes) => {
       review: {
         type: DataTypes.STRING,
       },
-      checkin: { type: DataTypes.BOOLEAN, default: false },
+      rating: { type: DataTypes.INTEGER, allowNull: false },
     },
     {}
   );

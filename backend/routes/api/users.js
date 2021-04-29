@@ -37,8 +37,13 @@ router.post(
   validateSignup,
   asyncHandler(async (req, res) => {
     const { email, password, username, breweryName } = req.body;
-
-    const profileImageUrl = await singlePublicFileUpload(req.file);
+    let profileImageUrl;
+    if (req.file) {
+      profileImageUrl = await singlePublicFileUpload(req.file);
+    } else {
+      profileImageUrl =
+        "https://zoiglawsbucket.s3.amazonaws.com/default-profile-picture.png";
+    }
 
     const user = await User.signup({
       username,

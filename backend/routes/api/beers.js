@@ -40,6 +40,12 @@ router.post(
   beerValidators,
   asyncHandler(async (req, res) => {
     const { name, style, status, ibus, userId, abv } = req.body;
+    let beerImageUrl;
+    if (req.file) {
+      beerImageUrl = await singlePublicFileUpload(req.file);
+    } else {
+      beerImageUrl = "https://zoiglawsbucket.s3.amazonaws.com/cheers.jpeg";
+    }
     const beer = await db.Beer.build({
       name,
       style,
@@ -47,8 +53,8 @@ router.post(
       userId,
       abv,
       ibus,
+      beerImageUrl,
     });
-
     const validationErrors = validationResult(req);
     if (validationErrors.isEmpty()) {
       {
