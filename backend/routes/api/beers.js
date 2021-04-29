@@ -5,8 +5,6 @@ const db = require("../../db/models");
 const { check, validationResult } = require("express-validator");
 const { handleValidationErrors } = require("../../utils/validation");
 const { singlePublicFileUpload, singleMulterUpload } = require("../../awsS3");
-const { setTokenCookie } = require("../../utils/auth");
-// const { setTokenCookie, requireAuth } = require("../../utils/auth");
 
 const beerValidators = [
   check("name")
@@ -79,29 +77,20 @@ router.post(
   })
 );
 
-const update = async (details) => {
-  const id = details.id;
-  delete details.id;
-  await beer.update(details, { where: { id } });
-  return id;
-};
-
 router.put(
   "/:id",
   singleMulterUpload("image"),
   beerValidators,
   asyncHandler(async (req, res) => {
     const id = req.params.id;
-    const { name, style, status, ibus, userId, abv } = req.body;
     req.body.id = id;
-    console.log("request", req.body);
+
     let beerImageUrl;
     if (req.file) {
       beerImageUrl = await singlePublicFileUpload(req.file);
     }
     req.body.beerImageUrl = beerImageUrl;
-    console.log(beerImageUrl);
-    console.log("=======================", id);
+
     const beer = await db.Beer.findByPk(id);
 
     const validationErrors = validationResult(req);
@@ -113,27 +102,6 @@ router.put(
     const newBeer = await beer.update(req.body);
 
     res.json(newBeer);
-
-    // if (beer) {
-    //   beer.name = name;
-    //   beer.style = style;
-    //   beer.status = status;
-    //   beer.userId = userId;
-    //   beer.abv = abv;
-    //   beer.ibus = ibus;
-    //   beer.beerImageUrl = beerImageUrl;
-    //   await beer.save();
-    //   res.json({ beer });
-    // } else {
-    //   const error = new Error(`Beer ${id} not found!`);
-    //   error.status = 404;
-    //   error.title = "Beer not found";
-    //   res.json({ error });
-    // }
-
-    // const id = await update(req.body);
-    // const beer = await db.Beer.findByPk(id);
-    // return res.json(beer);
   })
 );
 

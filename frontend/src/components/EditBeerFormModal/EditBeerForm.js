@@ -6,7 +6,6 @@ import "./EditBeerForm.css";
 const EditBeerForm = ({ onClose, beer }) => {
   const dispatch = useDispatch();
   const userId = useSelector((state) => state.session.user.id);
-  //   const beer = useSelector((state) => state.beer)
   const [name, setName] = useState(beer.name);
   const [style, setStyle] = useState(beer.style);
   const [status, setStatus] = useState(beer.status);
@@ -20,7 +19,6 @@ const EditBeerForm = ({ onClose, beer }) => {
   const updateIbus = (e) => setIbus(e.target.value);
   const updateAbv = (e) => setAbv(e.target.value);
 
-  // if (!userId) return alert("Must be signed in to do that");
   const id = beer.id;
 
   const handleSubmit = (e) => {
@@ -34,14 +32,12 @@ const EditBeerForm = ({ onClose, beer }) => {
       userId,
       image,
       id,
-      //added userId - see if still works?
     };
-    dispatch(beerActions.updateBeer(payload));
-    // .catch(async (res) => {
-    //   const beerData = await res.json();
-    //   if (beerData && beerData.errors);
-    //   setErrors(beerData.errors);
-    // });
+    dispatch(beerActions.updateBeer(payload)).catch(async (res) => {
+      const beerData = await res.json();
+      if (beerData && beerData.errors);
+      setErrors(beerData.errors);
+    });
 
     onClose();
   };

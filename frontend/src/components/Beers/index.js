@@ -34,7 +34,11 @@ export default function Beers() {
           <img
             className="beerLogo__img"
             alt="beer logo"
-            src={beer.beerImageUrl}
+            src={
+              beer.beerImageUrl
+                ? beer.beerImageUrl
+                : "../../images/default-beer-picture.jpeg"
+            }
           />
         </div>
       </div>

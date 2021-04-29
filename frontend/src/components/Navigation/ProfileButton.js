@@ -25,6 +25,9 @@ function ProfileButton({ user }) {
     e.preventDefault();
     dispatch(sessionActions.logoutUser());
   };
+  if (!user.profileImageUrl) {
+    user.profileImageUrl = "../../images/default-profile-picture.png";
+  }
 
   return (
     <div>
@@ -35,12 +38,12 @@ function ProfileButton({ user }) {
         <div className="menu__profile--dropdown">
           <div>{user.username}</div>
           <div>{user.email}</div>
-          {/* <img
+          <img
             className="profile__img"
             alt="profile"
             src={user.profileImageUrl}
           />
-           */}
+
           <div>
             <button onClick={handleLogout}>Log Out</button>
           </div>
