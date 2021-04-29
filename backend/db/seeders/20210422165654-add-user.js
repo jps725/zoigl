@@ -12,18 +12,24 @@ module.exports = {
           username: "Just Tasting",
           hashedPassword: bcrypt.hashSync("password"),
           breweryName: "Tastery",
+          profileImageUrl:
+            "https://zoiglawsbucket.s3.amazonaws.com/default-profile-picture.png",
         },
         {
           email: faker.internet.email(),
           username: "FakeUser1",
           hashedPassword: bcrypt.hashSync(faker.internet.password()),
           breweryName: "Fakery1",
+          profileImageUrl:
+            "https://zoiglawsbucket.s3.amazonaws.com/default-profile-picture.png",
         },
         {
           email: faker.internet.email(),
           username: "FakeUser2",
           hashedPassword: bcrypt.hashSync(faker.internet.password()),
           breweryName: "Fakery2",
+          profileImageUrl:
+            "https://zoiglawsbucket.s3.amazonaws.com/default-profile-picture.png",
         },
       ],
       {}

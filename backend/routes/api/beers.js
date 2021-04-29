@@ -53,6 +53,8 @@ router.post(
     let beerImageUrl;
     if (req.file) {
       beerImageUrl = await singlePublicFileUpload(req.file);
+    } else {
+      beerImageUrl = "https://zoiglawsbucket.s3.amazonaws.com/cheers.jpeg";
     }
     const beer = await db.Beer.build({
       name,
@@ -63,7 +65,6 @@ router.post(
       ibus,
       beerImageUrl,
     });
-
     const validationErrors = validationResult(req);
     if (validationErrors.isEmpty()) {
       {

@@ -10,6 +10,7 @@ const router = require("express").Router();
 const beersRouter = require("./beers");
 const sessionRouter = require("./session.js");
 const usersRouter = require("./users.js");
+const reviewsRouter = require("./reviews.js");
 // ***********TEST ROUTES***************
 // router.post("/test", function (req, res) {
 //   res.json({ requestBody: req.body });
@@ -40,5 +41,6 @@ const usersRouter = require("./users.js");
 router.use("/session", sessionRouter);
 router.use("/users", usersRouter);
 router.use("/beers", beersRouter);
+router.use("/reviews", reviewsRouter);
 
 module.exports = router;
