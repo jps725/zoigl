@@ -4,6 +4,7 @@ import { getBeers } from "../../store/beers";
 import AddBeerFormModal from "../AddBeerFormModal";
 import EditBeerFormModal from "../EditBeerFormModal";
 import * as beerActions from "../../store/beers";
+import AddReviewFormModal from "../AddReviewFormModal";
 
 export default function Beers() {
   const dispatch = useDispatch();
@@ -22,6 +23,7 @@ export default function Beers() {
       <div key={beer.id}>
         <h2>{beer.name}</h2>
         <EditBeerFormModal beer={beer} />
+        <AddReviewFormModal beer={beer} />
         <button value={beer.id} onClick={handleDelete}>
           Delete
         </button>

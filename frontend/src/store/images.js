@@ -43,7 +43,7 @@ export const getProfileImage = () => async (dispatch) => {
   }
 };
 
-export const createBeer = (formData) => async (dispatch) => {
+export const createBeerImage = (formData) => async (dispatch) => {
   const res = await csrfFetch("/api/beers", {
     method: "POST",
     headers: { "Content-Type": "application/json" },

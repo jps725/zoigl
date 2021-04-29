@@ -27,7 +27,7 @@ router.post(
   reviewValidators,
   asyncHandler(async (req, res) => {
     const { rating, review, userId, beerId } = req.body;
-    const review = await db.Review.build({
+    const newReview = await db.Review.build({
       rating,
       review,
       userId,
@@ -37,8 +37,8 @@ router.post(
     const validationErrors = validationResult(req);
     if (validationErrors.isEmpty()) {
       {
-        await review.save();
-        return res.json({ review });
+        await newReview.save();
+        return res.json({ newReview });
       }
     } else {
       const errors = validationErrors.array().map((error) => error.msg);
