@@ -11,7 +11,7 @@ function EditBeerFormModal({ beer }) {
 
   return (
     <div>
-      <button onClick={handleShowModal}>Edit</button>
+      <button onClick={handleShowModal}>Update Beer</button>
       {showModal && (
         <Modal onClose={handleCloseModal}>
           <EditBeerForm onClose={handleCloseModal} beer={beer} />

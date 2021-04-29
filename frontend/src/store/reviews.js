@@ -28,13 +28,18 @@ const removeReview = (reviewId) => ({
 });
 
 export const getReviews = () => async (dispatch) => {
+  console.log("res============");
   const res = await csrfFetch("/api/reviews");
-
   if (res.ok) {
     const { reviews } = await res.json();
     dispatch(loadReviews(reviews));
   }
 };
+
+// export const getReviewsForBeer = () => async (dispatch) => {
+//   const beerId = req.params.id;
+//   const res = await csrfFetch(`/api/reviews/${beerId}`);
+// };
 
 export const createReview = (formData) => async (dispatch) => {
   const res = await csrfFetch("/api/reviews", {
@@ -44,12 +49,13 @@ export const createReview = (formData) => async (dispatch) => {
   });
   if (res.ok) {
     const newReview = await res.json();
-    dispatch(addReview(newReview.review));
-    return res;
+    dispatch(addReview(newReview));
+    return newReview;
   }
 };
 
 export const updateReview = (formData) => async (dispatch) => {
+  console.log("form================", formData);
   const res = await csrfFetch(`/api/reviews/${formData.id}`, {
     method: "PUT",
     headers: { "Content-Type": "application/json" },

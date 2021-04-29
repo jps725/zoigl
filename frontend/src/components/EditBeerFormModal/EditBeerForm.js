@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import * as beerActions from "../../store/beers";
 import "./EditBeerForm.css";
@@ -21,25 +21,61 @@ const EditBeerForm = ({ onClose, beer }) => {
 
   const id = beer.id;
 
+  const reset = () => {
+    setName("");
+    setStyle("");
+    setStatus("");
+    setIbus(0);
+    setAbv(0);
+    setImage(null);
+    setErrors({});
+  };
+
+  useEffect(() => {
+    let errors = {};
+    if (name.length < 3) {
+      errors.name = "Name must be more than 3 characters.";
+    } else if (name.length > 50) {
+      errors.name = "Name must be less than 50 characters.";
+    }
+    if (!style) {
+      errors.style = "Please select a style.";
+    }
+    if (!status) {
+      errors.status = "Please select a status.";
+    }
+    if (abv < 0) {
+      errors.abv = "ABV must be greater than 0%.";
+    } else if (abv > 30) {
+      errors.abv = "ABV must be below 30%.";
+    }
+    if (ibus < 0) {
+      errors.ibus = "IBUs must be greater than 0.";
+    } else if (ibus > 200) {
+      errors.ibus = "IBUs must be less than 200.";
+    }
+    setErrors(errors);
+  }, [name, style, status, abv, ibus]);
+
   const handleSubmit = (e) => {
     e.preventDefault();
-    const payload = {
-      name,
-      style,
-      status,
-      ibus,
-      abv,
-      userId,
-      image,
-      id,
-    };
-    dispatch(beerActions.updateBeer(payload)).catch(async (res) => {
-      const beerData = await res.json();
-      if (beerData && beerData.errors);
-      setErrors(beerData.errors);
-    });
-
-    onClose();
+    if (!errors.length) {
+      const payload = {
+        name,
+        style,
+        status,
+        ibus,
+        abv,
+        userId,
+        image,
+        id,
+      };
+      dispatch(beerActions.updateBeer(payload)).catch(async (res) => {
+        await res.json();
+      });
+      reset();
+      onClose();
+    }
   };
 
   const updateFile = (e) => {
@@ -50,13 +86,6 @@ const EditBeerForm = ({ onClose, beer }) => {
   return (
     <div className="form__editBeer">
       <h1>Update Beer</h1>
-
-      {errors.length > 0 &&
-        errors.map((error) => (
-          <div className="errors" key={error}>
-            {error}
-          </div>
-        ))}
       <form onSubmit={handleSubmit}>
         <label>
           <input
@@ -67,6 +96,7 @@ const EditBeerForm = ({ onClose, beer }) => {
             onChange={updateName}
           />
         </label>
+        {errors.name && <div className="errors">{errors.name}</div>}
         <label>
           <input
             type="text"
@@ -76,6 +106,7 @@ const EditBeerForm = ({ onClose, beer }) => {
             onChange={updateStyle}
           />
         </label>
+        {errors.style && <div className="errors">{errors.style}</div>}
         <label>
           <input
             type="text"
@@ -85,8 +116,9 @@ const EditBeerForm = ({ onClose, beer }) => {
             onChange={updateStatus}
           />
         </label>
+        {errors.status && <div className="errors">{errors.status}</div>}
         <label>
-          IBUs
+          IBUs:
           <input
             type="number"
             placeholder="IBUs"
@@ -95,6 +127,7 @@ const EditBeerForm = ({ onClose, beer }) => {
             onChange={updateIbus}
           />
         </label>
+        {errors.ibus && <div className="errors">{errors.ibus}</div>}
         <label>
           ABV
           <input
@@ -106,10 +139,13 @@ const EditBeerForm = ({ onClose, beer }) => {
           />
           %
         </label>
+        {errors.abv && <div className="errors">{errors.abv}</div>}
         <label>
           <input type="file" onChange={updateFile} />
         </label>
-        <button type="submit">Update Beer</button>
+        <button type="submit" disabled={Object.keys(errors).length}>
+          Update Beer
+        </button>
       </form>
     </div>
   );

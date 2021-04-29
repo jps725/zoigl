@@ -1,6 +1,6 @@
 import { useSelector, useDispatch } from "react-redux";
 import { useEffect } from "react";
-import { getBeers } from "../../store/beers";
+// import { getBeers } from "../../store/beers";
 import AddBeerFormModal from "../AddBeerFormModal";
 import EditBeerFormModal from "../EditBeerFormModal";
 import * as beerActions from "../../store/beers";
@@ -11,7 +11,7 @@ export default function Beers() {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(getBeers());
+    dispatch(beerActions.getBeers());
   }, [dispatch]);
 
   const handleDelete = (e) => {
@@ -26,7 +26,7 @@ export default function Beers() {
         <EditBeerFormModal beer={beer} />
         <AddReviewFormModal beer={beer} />
         <button value={beer.id} onClick={handleDelete}>
-          Delete
+          Delete Beer
         </button>
         <div>
           <div>{beer.style}</div>
@@ -36,11 +36,7 @@ export default function Beers() {
           <img
             className="beerLogo__img"
             alt="beer logo"
-            src={
-              beer.beerImageUrl
-                ? beer.beerImageUrl
-                : "../../images/default-beer-picture.jpeg"
-            }
+            src={beer.beerImageUrl}
           />
         </div>
       </div>

@@ -14,7 +14,11 @@ const beerValidators = [
     .withMessage("Beer name must be no more than 50 characters"),
   check("style")
     .exists({ checkFalsy: true })
-    .withMessage("Please select a style"),
+    .withMessage("Please select a style")
+    .isLength({ min: 3 })
+    .withMessage("Beer style must be more than 3 characters")
+    .isLength({ max: 30 })
+    .withMessage("Beer style must be less than 30 characters"),
   check("status")
     .exists({ checkFalsy: true })
     .withMessage("Please select a status"),
@@ -89,6 +93,8 @@ router.put(
     let beerImageUrl;
     if (req.file) {
       beerImageUrl = await singlePublicFileUpload(req.file);
+    } else {
+      beerImageUrl = "https://zoiglawsbucket.s3.amazonaws.com/cheers.jpeg";
     }
     req.body.beerImageUrl = beerImageUrl;
 

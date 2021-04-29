@@ -25,9 +25,6 @@ function ProfileButton({ user }) {
     e.preventDefault();
     dispatch(sessionActions.logoutUser());
   };
-  if (!user.profileImageUrl) {
-    user.profileImageUrl = "../../images/default-profile-picture.png";
-  }
 
   return (
     <div>

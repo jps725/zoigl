@@ -16,9 +16,20 @@ const reviewValidators = [
 router.get(
   "/",
   asyncHandler(async (req, res) => {
-    const beerId = req.body.beerId;
-    const reviews = await db.Review.findAll({ where: { beerId } });
+    const reviews = await db.Review.findAll();
     res.json({ reviews });
+  })
+);
+
+router.get(
+  "/:id",
+  asyncHandler(async (req, res) => {
+    const beerId = req.params.id;
+    console.log("beerId=================", beerId);
+    const reviewsForCurrentBeer = await db.Review.findAll({
+      where: { beerId },
+    });
+    res.json({ reviewsForCurrentBeer });
   })
 );
 
@@ -50,7 +61,8 @@ router.post(
 const update = async (details) => {
   const id = details.id;
   delete details.id;
-  await db.Reviews.update(details, { where: { id } });
+  console.log("--------------------", details);
+  await db.Review.update(details, { where: { id } });
   return id;
 };
 

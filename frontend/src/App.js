@@ -5,7 +5,7 @@ import SignupFormPage from "./components/SignupFormModal";
 import * as sessionActions from "./store/session";
 import Navigation from "./components/Navigation";
 import Beers from "./components/Beers";
-import Reviews from "./components/Reviews";
+import ReviewsFeed from "./components/ReviewsFeed";
 import Splash from "./components/Splash";
 import Profile from "./components/Profile";
 
@@ -29,7 +29,7 @@ function App() {
             <Beers />
           </Route>
           <Route path="/reviews">
-            <Reviews />
+            <ReviewsFeed />
           </Route>
           <Route path="/splash">
             <Splash />

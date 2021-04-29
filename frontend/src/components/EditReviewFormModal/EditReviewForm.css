@@ -32,9 +32,8 @@ button {
 }
 
 .errors {
-  background-color: rgba(249, 0, 0, 0.646);
-  border-radius: 3px;
-  margin: 1em;
-  padding: 1em;
+  color: rgba(249, 0, 0, 0.646);
+  font-family: Impact, Haettenschweiler, "Arial Narrow Bold", sans-serif;
+  padding: 0.25em;
   box-sizing: border-box;
 }
