@@ -29,7 +29,6 @@ const removeBeer = (beerId) => ({
 
 export const getBeers = () => async (dispatch) => {
   const res = await csrfFetch("/api/beers");
-  console.log("i got hit");
   if (res.ok) {
     const { beers } = await res.json();
     dispatch(load(beers));

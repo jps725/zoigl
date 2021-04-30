@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import * as beerActions from "../../store/beers";
 import "./BeerForm.css";
+import beerStyles from "../beerStyles.js";
 
 const AddBeerForm = ({ onClose }) => {
   const dispatch = useDispatch();
@@ -38,6 +39,8 @@ const AddBeerForm = ({ onClose }) => {
       errors.name = "Name must be less than 50 characters.";
     }
     if (!style) {
+      errors.style = "Please select a style.";
+    } else if (style.startsWith("--")) {
       errors.style = "Please select a style.";
     }
     if (!status) {
@@ -87,13 +90,18 @@ const AddBeerForm = ({ onClose }) => {
         </label>
         {errors.name && <div className="errors">{errors.name}</div>}
         <label>
-          <input
+          {/* <input
             type="text"
             placeholder="Style"
             required
             value={style}
             onChange={updateStyle}
-          />
+          /> */}
+          <select onChange={updateStyle}>
+            {beerStyles.map((style) => (
+              <option key={style}>{style}</option>
+            ))}
+          </select>
         </label>
         {errors.style && <div className="errors">{errors.style}</div>}
         <label>
