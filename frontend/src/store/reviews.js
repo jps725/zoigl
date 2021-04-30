@@ -1,4 +1,5 @@
 import { csrfFetch } from "./csrf";
+import * as beerActions from "./beers";
 
 const LOAD = "reviews/LOAD";
 const ADD_ONE = "reviews/ADD_ONE";
@@ -49,19 +50,19 @@ export const createReview = (formData) => async (dispatch) => {
   if (res.ok) {
     const newReview = await res.json();
     dispatch(addReview(newReview));
+    dispatch(beerActions.getBeers());
     return newReview;
   }
 };
 
 export const updateReview = (formData) => async (dispatch) => {
-  console.log("form================", formData);
   const res = await csrfFetch(`/api/reviews/${formData.id}`, {
     method: "PUT",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(formData),
   });
   if (res.ok) {
-    const updatedReview = await res.json();
+    const { updatedReview } = await res.json();
     dispatch(editReview(updatedReview));
     return updatedReview;
   }

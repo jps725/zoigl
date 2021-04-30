@@ -57,6 +57,7 @@ router.post(
     if (validationErrors.isEmpty()) {
       {
         await newReview.save();
+
         return res.json({ newReview });
       }
     } else {
@@ -78,8 +79,16 @@ router.put(
   reviewValidators,
   asyncHandler(async (req, res) => {
     const id = await update(req.body);
-    const review = await db.Review.findByPk(id);
-    return res.json(review);
+
+    const updatedReview = await db.Review.findOne({
+      where: { id },
+      include: {
+        model: db.Beer,
+        include: { model: db.User, attributes: ["breweryName"] },
+      },
+    });
+
+    res.json({ updatedReview });
   })
 );
 

@@ -35,9 +35,10 @@ const AddReviewForm = ({ onClose, beer }) => {
     e.preventDefault();
     const addReview = { rating, review, userId, beerId };
 
-    dispatch(reviewActions.createReview(addReview)).catch(async (res) => {
-      await res.json();
-    });
+    dispatch(reviewActions.createReview(addReview));
+    // .catch(async (res) => {
+    //   await res.json();
+    // });
     reset();
     onClose();
   };
