@@ -28,7 +28,6 @@ const removeReview = (reviewId) => ({
 });
 
 export const getReviews = () => async (dispatch) => {
-  console.log("res============");
   const res = await csrfFetch("/api/reviews");
   if (res.ok) {
     const { reviews } = await res.json();

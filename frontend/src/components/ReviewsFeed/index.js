@@ -1,10 +1,8 @@
 import { useSelector, useDispatch } from "react-redux";
 import { useEffect } from "react";
-// import AddBeerFormModal from "../AddBeerFormModal";
-// import EditBeerFormModal from "../EditBeerFormModal";
-// import AddReviewFormModal from "../AddReviewFormModal";
 import EditReviewFormModal from "../EditReviewFormModal";
 import * as reviewActions from "../../store/reviews";
+import "./index.css";
 
 export default function ReviewsFeed() {
   const dispatch = useDispatch();
@@ -20,15 +18,22 @@ export default function ReviewsFeed() {
   const reviews = useSelector((state) => {
     const reviewsList = Object.values(state.review);
     return reviewsList?.map((review) => (
-      <div key={review.id}>
+      <div key={review.id} value={review.Beer.id}>
+        <div>
+          <div>Beer Name: {review.Beer.name}</div>
+          <div>Brewery: {review.Beer.User.breweryName}</div>
+          <div>Rating: {review.rating}</div>
+          <div>Review: {review.review}</div>
+          <img
+            className="beer__img"
+            src={review.Beer.beerImageUrl}
+            alt="beer logo"
+          />
+        </div>
         <EditReviewFormModal review={review} />
         <button value={review.id} onClick={handleDelete}>
           Delete
         </button>
-        <div>
-          <div>{review.rating}</div>
-          <div>{review.review}</div>
-        </div>
       </div>
     ));
   });

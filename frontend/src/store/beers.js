@@ -32,6 +32,7 @@ export const getBeers = () => async (dispatch) => {
 
   if (res.ok) {
     const { beers } = await res.json();
+    console.log(beers);
     dispatch(load(beers));
   }
 };
