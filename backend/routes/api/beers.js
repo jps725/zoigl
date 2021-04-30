@@ -80,10 +80,27 @@ router.post(
       ibus,
       beerImageUrl,
     });
+
     const validationErrors = validationResult(req);
     if (validationErrors.isEmpty()) {
       {
         await beer.save();
+        const beerId = beer.id;
+        beer = await db.Beer.findOne({
+          where: {
+            id: beerId,
+            include: [
+              {
+                model: db.User,
+                attributes: ["breweryName"],
+              },
+              {
+                model: db.Review,
+                include: [{ model: db.User }],
+              },
+            ],
+          },
+        });
         return res.json({ beer });
       }
     } else {

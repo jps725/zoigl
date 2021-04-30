@@ -30,7 +30,6 @@ router.get(
   "/:id",
   asyncHandler(async (req, res) => {
     const beerId = req.params.id;
-    console.log("beerId=================", beerId);
     const reviewsForCurrentBeer = await db.Review.findAll({
       where: { beerId },
       include: {
@@ -70,7 +69,6 @@ router.post(
 const update = async (details) => {
   const id = details.id;
   delete details.id;
-  console.log("--------------------", details);
   await db.Review.update(details, { where: { id } });
   return id;
 };
