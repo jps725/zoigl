@@ -29,15 +29,28 @@ export default function Beers() {
           Delete Beer
         </button>
         <div>
-          <div>{beer.style}</div>
-          <div>{beer.status}</div>
-          <div>{beer.ibus}</div>
-          <div>{beer.abv}%</div>
+          <div>Brewery: {beer.User.breweryName}</div>
+          <div>Style: {beer.style}</div>
+          <div>Status: {beer.status}</div>
+          <div>IBUs: {beer.ibus}</div>
+          <div>ABV: {beer.abv}%</div>
           <img
             className="beerLogo__img"
             alt="beer logo"
             src={beer.beerImageUrl}
           />
+          {beer.Reviews?.map((review) => (
+            <div key={review.id}>
+              <div>Review: {review.review} </div>
+              <div>Rating: {review.rating} </div>
+              <div>By User: {review.User.username}</div>
+              <img
+                className="profile__img"
+                src={review.User.profileImageUrl}
+                alt="profile"
+              />
+            </div>
+          ))}
         </div>
       </div>
     ));

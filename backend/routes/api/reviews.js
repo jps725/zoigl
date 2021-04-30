@@ -16,7 +16,12 @@ const reviewValidators = [
 router.get(
   "/",
   asyncHandler(async (req, res) => {
-    const reviews = await db.Review.findAll();
+    const reviews = await db.Review.findAll({
+      include: {
+        model: db.Beer,
+        include: { model: db.User, attributes: ["breweryName"] },
+      },
+    });
     res.json({ reviews });
   })
 );
@@ -28,6 +33,10 @@ router.get(
     console.log("beerId=================", beerId);
     const reviewsForCurrentBeer = await db.Review.findAll({
       where: { beerId },
+      include: {
+        model: db.Beer,
+        include: { model: db.User, attributes: ["breweryName"] },
+      },
     });
     res.json({ reviewsForCurrentBeer });
   })

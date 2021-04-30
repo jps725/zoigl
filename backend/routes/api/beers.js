@@ -34,19 +34,30 @@ const beerValidators = [
 router.get(
   "/",
   asyncHandler(async (req, res) => {
-    const beers = await db.Beer.findAll();
+    const beers = await db.Beer.findAll({
+      include: [
+        {
+          model: db.User,
+          attributes: ["breweryName"],
+        },
+        {
+          model: db.Review,
+          include: [{ model: db.User }],
+        },
+      ],
+    });
 
     res.json({ beers });
   })
 );
 
-router.get(
-  "/:id",
-  asyncHandler(async (req, res) => {
-    const beer = await db.Beer.findByPk(req.params.id);
-    return res.json({ beer });
-  })
-);
+// router.get(
+//   "/:id",
+//   asyncHandler(async (req, res) => {
+//     const beer = await db.Beer.findByPk(req.params.id);
+//     return res.json({ beer });
+//   })
+// );
 
 router.post(
   "/",
