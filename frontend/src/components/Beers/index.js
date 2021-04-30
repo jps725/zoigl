@@ -41,8 +41,14 @@ export default function Beers() {
           />
           {beer.Reviews?.map((review) => (
             <div key={review.id}>
-              <div>{review.review} </div>
-              <div>{review.rating} </div>
+              <div>Review: {review.review} </div>
+              <div>Rating: {review.rating} </div>
+              <div>By User: {review.User.username}</div>
+              <img
+                className="profile__img"
+                src={review.User.profileImageUrl}
+                alt="profile"
+              />
             </div>
           ))}
         </div>

@@ -42,12 +42,7 @@ router.get(
         },
         {
           model: db.Review,
-          include: {
-            model: db.User,
-            where: {
-              userId: db.User.id,
-            },
-          },
+          include: [{ model: db.User }],
         },
       ],
     });
