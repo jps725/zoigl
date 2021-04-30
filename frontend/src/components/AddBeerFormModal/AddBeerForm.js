@@ -59,9 +59,10 @@ const AddBeerForm = ({ onClose }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     const beer = { name, style, status, ibus, abv, userId, image };
-    dispatch(beerActions.createBeer(beer)).catch(async (res) => {
-      await res.json();
-    });
+    dispatch(beerActions.createBeer(beer));
+    // .catch(async (res) => {
+    //   await res.json();
+    // });
     reset();
     onClose();
   };

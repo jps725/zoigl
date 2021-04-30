@@ -70,9 +70,10 @@ const EditBeerForm = ({ onClose, beer }) => {
         image,
         id,
       };
-      dispatch(beerActions.updateBeer(payload)).catch(async (res) => {
-        await res.json();
-      });
+      dispatch(beerActions.updateBeer(payload));
+      // .catch(async (res) => {
+      //   await res.json();
+      // });
       reset();
       onClose();
     }

@@ -85,23 +85,23 @@ router.post(
     if (validationErrors.isEmpty()) {
       {
         await beer.save();
-        const beerId = beer.id;
-        beer = await db.Beer.findOne({
+
+        const newBeer = await db.Beer.findOne({
           where: {
-            id: beerId,
-            include: [
-              {
-                model: db.User,
-                attributes: ["breweryName"],
-              },
-              {
-                model: db.Review,
-                include: [{ model: db.User }],
-              },
-            ],
+            id: beer.id,
           },
+          include: [
+            {
+              model: db.User,
+              attributes: ["breweryName"],
+            },
+            {
+              model: db.Review,
+              include: [{ model: db.User }],
+            },
+          ],
         });
-        return res.json({ beer });
+        res.json({ newBeer });
       }
     } else {
       const errors = validationErrors.array().map((error) => error.msg);
@@ -134,9 +134,25 @@ router.put(
       res.json({ errors });
       return;
     }
-    const newBeer = await beer.update(req.body);
 
-    res.json(newBeer);
+    const updatedBeer = await beer.update(req.body);
+
+    const updatedWithInfo = await db.Beer.findOne({
+      where: {
+        id: updatedBeer.id,
+      },
+      include: [
+        {
+          model: db.User,
+          attributes: ["breweryName"],
+        },
+        {
+          model: db.Review,
+          include: [{ model: db.User }],
+        },
+      ],
+    });
+    res.json({ updatedWithInfo });
   })
 );
 

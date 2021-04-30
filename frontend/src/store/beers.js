@@ -29,7 +29,7 @@ const removeBeer = (beerId) => ({
 
 export const getBeers = () => async (dispatch) => {
   const res = await csrfFetch("/api/beers");
-
+  console.log("i got hit");
   if (res.ok) {
     const { beers } = await res.json();
     dispatch(load(beers));
@@ -54,8 +54,8 @@ export const createBeer = (beer) => async (dispatch) => {
     body: formData,
   });
   if (res.ok) {
-    const newBeer = await res.json();
-    dispatch(addBeer(newBeer.beer));
+    const { newBeer } = await res.json();
+    dispatch(addBeer(newBeer));
     return newBeer;
   }
 };
@@ -89,9 +89,9 @@ export const updateBeer = (beer) => async (dispatch) => {
   });
 
   if (res.ok) {
-    const updatedBeer = await res.json();
-    dispatch(editBeer(updatedBeer));
-    return updatedBeer;
+    const { updatedWithInfo } = await res.json();
+    dispatch(editBeer(updatedWithInfo));
+    return updatedWithInfo;
   }
 };
 
