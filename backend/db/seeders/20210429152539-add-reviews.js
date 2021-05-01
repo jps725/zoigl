@@ -1,5 +1,5 @@
 "use strict";
-
+const reviews = require("../../randomSeeder/randomReview");
 module.exports = {
   up: (queryInterface, Sequelize) => {
     /*
@@ -12,54 +12,33 @@ module.exports = {
         isBetaMember: false
       }], {});
     */
-    return queryInterface.bulkInsert(
-      "Reviews",
-      [
-        {
-          userId: 1,
-          beerId: 4,
-          review: "Supper hoppy, effervescent, with a nice piney nose.",
-          rating: 4,
-        },
-        {
-          userId: 2,
-          beerId: 4,
-          review: "One of the best IPAs I've ever had.",
-          rating: 5,
-        },
-        {
-          userId: 3,
-          beerId: 4,
-          review:
-            "Pretty good, wish there was more citrus. The bitterness was a little too harsh",
-          rating: 3,
-        },
-        {
-          userId: 1,
-          beerId: 5,
-          review: "I'd have it again.",
-          rating: 3,
-        },
-        {
-          userId: 2,
-          beerId: 5,
-          rating: 3,
-        },
-        {
-          userId: 3,
-          beerId: 5,
-          review: "Nice black pepper not on the finish.",
-          rating: 4,
-        },
-        {
-          userId: 2,
-          beerId: 6,
-          review: "Great coffee notes, would go great with some chocolate.",
-          rating: 4,
-        },
-      ],
-      {}
-    );
+    let randomReviews = [];
+
+    const reviewCount = 300;
+
+    for (let i = 0; i < reviewCount; i++) {
+      let randomRating = Math.floor(Math.random() * 5) + 1;
+
+      let idxOne = Math.floor(Math.random() * 5);
+      let idxTwo = Math.floor(Math.random() * 5);
+
+      let revPartOne = reviews[randomRating].reviewPartOne[idxOne];
+      let revPartTwo = reviews[randomRating].reviewPartTwo[idxTwo];
+
+      let reviewString = revPartOne + " " + revPartTwo;
+
+      let randomUserId = Math.floor(Math.random() * 99) + 1;
+      let randomBeerId = Math.floor(Math.random() * 99) + 1;
+      let currentReview = {
+        userId: randomUserId,
+        beerId: randomBeerId,
+        review: reviewString,
+        rating: randomRating,
+      };
+      randomReviews.push(currentReview);
+    }
+
+    return queryInterface.bulkInsert("Reviews", randomReviews, {});
   },
 
   down: (queryInterface, Sequelize) => {
