@@ -1,4 +1,6 @@
 "use strict";
+const { beerStyles, status, images } = require("../../randomSeeder/randomBeer");
+const faker = require("faker");
 
 module.exports = {
   up: (queryInterface, Sequelize) => {
@@ -9,39 +11,25 @@ module.exports = {
       Example:
 
     */
-    return queryInterface.bulkInsert(
-      "Beers",
-      [
-        {
-          name: "Flying Eagle IPA",
-          style: "IPA",
-          userId: 1,
-          status: "On Tap",
-          abv: 8.4,
-          ibus: 91,
-          beerImageUrl: "https://zoiglawsbucket.s3.amazonaws.com/cheers.jpeg",
-        },
-        {
-          name: "Spring into Saison",
-          style: "Saison",
-          userId: 1,
-          status: "Bottled",
-          abv: 6.1,
-          ibus: 37,
-          beerImageUrl: "https://zoiglawsbucket.s3.amazonaws.com/cheers.jpeg",
-        },
-        {
-          name: "Midnight Moonlight",
-          style: "Stout",
-          userId: 1,
-          status: "Cellared",
-          abv: 9.1,
-          ibus: 43,
-          beerImageUrl: "https://zoiglawsbucket.s3.amazonaws.com/cheers.jpeg",
-        },
-      ],
-      {}
-    );
+
+    let seededBeers = [];
+
+    const newBeerCount = 100;
+
+    for (let i = 0; i < newBeerCount; i++) {
+      let randomBeer = {
+        name: faker.random.words(),
+        style: beerStyles[Math.floor(Math.random() * 78)],
+        userId: Math.floor(Math.random() * 99) + 1,
+        status: status[Math.floor(Math.random() * 4)],
+        abv: Math.floor(Math.random() * (150 - 15) + 10) / 10,
+        ibus: Math.floor(Math.random() * 150),
+        beerImageUrl: images[Math.floor(Math.random() * 9)],
+      };
+      seededBeers.push(randomBeer);
+    }
+
+    return queryInterface.bulkInsert("Beers", seededBeers, {});
   },
 
   down: (queryInterface, Sequelize) => {
