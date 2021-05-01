@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import * as beerActions from "../../store/beers";
-import "./BeerForm.css";
 import beerStyles from "../beerStyles.js";
 
 const AddBeerForm = ({ onClose }) => {
@@ -76,7 +75,7 @@ const AddBeerForm = ({ onClose }) => {
   };
 
   return (
-    <div className="form__addBeer">
+    <div className="form__div">
       <h1>Add New Beer</h1>
       <form onSubmit={handleSubmit}>
         <label>

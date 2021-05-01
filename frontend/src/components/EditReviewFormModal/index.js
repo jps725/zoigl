@@ -1,4 +1,3 @@
-import "./index.css";
 import EditReviewForm from "./EditReviewForm";
 import React, { useState } from "react";
 import { Modal } from "../../context/Modal";

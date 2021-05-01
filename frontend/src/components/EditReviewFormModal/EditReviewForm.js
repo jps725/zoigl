@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import * as reviewActions from "../../store/reviews";
-import "./EditReviewForm.css";
 
 const EditReviewForm = ({ onClose, review }) => {
   const dispatch = useDispatch();
@@ -43,7 +42,7 @@ const EditReviewForm = ({ onClose, review }) => {
   };
 
   return (
-    <div className="form__editReview">
+    <div className="form__div">
       <h1>Edit Review</h1>
       <form onSubmit={handleSubmit}>
         <label>
