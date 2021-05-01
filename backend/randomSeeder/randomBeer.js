@@ -1,4 +1,4 @@
-export const beerStyles = [
+const beerStyles = [
   "American Amber Ale",
   "American Amber Lager",
   "American Barley Wine",
@@ -81,7 +81,7 @@ export const beerStyles = [
   "Vienna-Style Lager",
 ];
 
-export const status = [
+const status = [
   "Bottled",
   "On Tap",
   "Kegged",
@@ -90,7 +90,7 @@ export const status = [
   "Planning",
 ];
 
-export const images = [
+const images = [
   "https://zoiglawsbucket.s3.amazonaws.com/beer-2328226_1280.png",
   "https://zoiglawsbucket.s3.amazonaws.com/beer-2649143_1280.jpeg",
   "https://zoiglawsbucket.s3.amazonaws.com/beer-4960422_1280.png",
@@ -102,3 +102,5 @@ export const images = [
   "https://zoiglawsbucket.s3.amazonaws.com/hop-4828332_1280.png",
   "https://zoiglawsbucket.s3.amazonaws.com/seamless-1082193_1280.jpeg",
 ];
+
+module.exports = { images, beerStyles, status };

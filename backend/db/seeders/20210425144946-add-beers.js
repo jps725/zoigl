@@ -20,7 +20,7 @@ module.exports = {
       let randomBeer = {
         name: faker.random.words(),
         style: beerStyles[Math.floor(Math.random() * 78)],
-        userId: Math.floor(Math.random() * 100),
+        userId: Math.floor(Math.random() * 99) + 1,
         status: status[Math.floor(Math.random() * 4)],
         abv: Math.floor(Math.random() * (150 - 15) + 10) / 10,
         ibus: Math.floor(Math.random() * 150),
