@@ -8,6 +8,7 @@ import Beers from "./components/Beers";
 import ReviewsFeed from "./components/ReviewsFeed";
 import Splash from "./components/Splash";
 import Profile from "./components/Profile";
+import Footer from "./components/Footer";
 
 function App() {
   const dispatch = useDispatch();
@@ -31,7 +32,7 @@ function App() {
           <Route path="/reviews">
             <ReviewsFeed />
           </Route>
-          <Route path="/splash">
+          <Route path="/">
             <Splash />
           </Route>
           <Route path="/profile">
@@ -39,6 +40,7 @@ function App() {
           </Route>
         </Switch>
       )}
+      <Footer />
     </div>
   );
 }
