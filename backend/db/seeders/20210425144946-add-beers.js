@@ -1,5 +1,5 @@
 "use strict";
-import { beerStyles, status, images } from "../../randomSeeder/randomBeer";
+const { beerStyles, status, images } = require("../../randomSeeder/randomBeer");
 const faker = require("faker");
 
 module.exports = {
