@@ -1,6 +1,6 @@
 import { useSelector } from "react-redux";
 import Beers from "../Beers";
-import "./index.css";
+import Events from "../Events";
 
 export default function Profile() {
   const user = useSelector((state) => state.session.user);
@@ -18,7 +18,14 @@ export default function Profile() {
         />
         <div>Brewery: {user.breweryName}</div>
       </div>
-      <Beers />
+      <div className="profile__display-container">
+        <div className="profile__beers-div">
+          <Beers />
+        </div>
+        <div className="profile__events-div">
+          <Events />
+        </div>
+      </div>
     </div>
   );
 }

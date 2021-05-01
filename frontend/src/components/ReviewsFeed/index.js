@@ -2,7 +2,6 @@ import { useSelector, useDispatch } from "react-redux";
 import { useEffect } from "react";
 import EditReviewFormModal from "../EditReviewFormModal";
 import * as reviewActions from "../../store/reviews";
-import "./index.css";
 
 export default function ReviewsFeed() {
   const dispatch = useDispatch();

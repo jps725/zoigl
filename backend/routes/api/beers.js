@@ -160,6 +160,8 @@ const remove = async (id) => {
   const beer = await db.Beer.findByPk(id);
   if (!beer) throw new Error("Can't find that beer");
 
+  await db.Review.destroy({ where: { beerId: id } });
+
   await db.Beer.destroy({ where: { id: beer.id } });
   return beer.id;
 };

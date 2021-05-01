@@ -1,4 +1,3 @@
-import "./index.css";
 import AddBeerForm from "./AddBeerForm";
 import React, { useState } from "react";
 import { Modal } from "../../context/Modal";
@@ -11,7 +10,9 @@ function AddBeerFormModal() {
 
   return (
     <div>
-      <button onClick={handleShowModal}>Add a Beer</button>
+      <button onClick={handleShowModal} className="addBeer__button">
+        Add a Beer
+      </button>
       {showModal && (
         <Modal onClose={handleCloseModal}>
           <AddBeerForm onClose={handleCloseModal} />

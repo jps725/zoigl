@@ -1,4 +1,3 @@
-import "./Navigation.css";
 import { NavLink } from "react-router-dom";
 import React from "react";
 import { useSelector } from "react-redux";
@@ -41,6 +40,7 @@ function Navigation({ isLoaded }) {
         <NavLink className="navLink" to="/reviews">
           Reviews
         </NavLink>
+        <div className="logo__nav">zoigl</div>
         {isLoaded && sessionLinks}
       </menu>
     </nav>

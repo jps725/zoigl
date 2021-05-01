@@ -32,7 +32,7 @@ function App() {
           <Route path="/reviews">
             <ReviewsFeed />
           </Route>
-          <Route path="/">
+          <Route path="/" exact>
             <Splash />
           </Route>
           <Route path="/profile">
