@@ -24,6 +24,21 @@ Beers Feed - Displays all of the beer and their respective reviews
 
 Reviews Feed - Displays all of the reviews 
 
+## Backend Query to return all associated reviews for each beer
+  ``` 
+  const beers = await db.Beer.findAll({
+      include: [
+        {
+          model: db.User,
+          attributes: ["breweryName"],
+        },
+        {
+          model: db.Review,
+          include: [{ model: db.User }],
+        },
+      ],
+    });
+```
 
 ## Future Features
   * Users will be able to search and filter based on selected criteria
