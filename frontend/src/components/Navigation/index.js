@@ -36,7 +36,7 @@ function Navigation({ isLoaded }) {
       </div>
     );
     homeLink = (
-      <NavLink className="navLink" id="homeLink" to="/splash">
+      <NavLink className="navLink" id="homeLink" to="/">
         Home
       </NavLink>
     );
