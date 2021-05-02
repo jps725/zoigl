@@ -40,6 +40,7 @@ Reviews Feed - Displays all of the reviews
     });
 ```
 
+![demo-gif](https://github.com/jps725/zoigl/blob/main/images/app-demo.gif)
 
 ## Future Features
   * Users will be able to search and filter based on selected criteria
