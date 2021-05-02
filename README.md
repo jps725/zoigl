@@ -12,7 +12,7 @@ A clone of Untappd for homebrewers, which gives users the ability to share their
   * React
   * Redux
 
-## Features and Funcitonality
+## Features and Functionality
 
 User Authentication - Users are able to securely sign-up, log-in, or use demo to test functionality.
 
