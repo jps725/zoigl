@@ -1,9 +1,11 @@
 import React, { useState } from "react";
 import * as sessionActions from "../../store/session";
 import { useDispatch, useSelector } from "react-redux";
+import { useHistory } from "react-router-dom";
 
 const SignupForm = () => {
   const dispatch = useDispatch();
+  const history = useHistory();
   const user = useSelector((state) => state.session.user);
 
   const [username, setUsername] = useState("");
@@ -27,6 +29,7 @@ const SignupForm = () => {
     setConfirmPassword("");
     setImage(null);
     setBreweryName("");
+    history.push("/profile");
   };
   const handleSubmit = (e) => {
     e.preventDefault();
