@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import * as sessionActions from "../../store/session";
+import { useHistory } from "react-router-dom";
 
 function ProfileButton({ user }) {
   const dispatch = useDispatch();
+  const history = useHistory();
   const [showMenu, setShowMenu] = useState(false);
 
   const openMenu = () => {
@@ -23,10 +25,11 @@ function ProfileButton({ user }) {
   const handleLogout = (e) => {
     e.preventDefault();
     dispatch(sessionActions.logoutUser());
+    history.push("/splash");
   };
 
   return (
-    <div>
+    <div id="beerGlassLink">
       <button className="button__profile" onClick={openMenu}>
         <i className="fas fa-beer" />
       </button>
@@ -40,9 +43,10 @@ function ProfileButton({ user }) {
             src={user.profileImageUrl}
           />
 
-          <div>
-            <button onClick={handleLogout}>Log Out</button>
-          </div>
+          <button className="logout__button" onClick={handleLogout}>
+            Log Out
+          </button>
+          <div></div>
         </div>
       )}
     </div>

@@ -1,18 +1,29 @@
-import { NavLink } from "react-router-dom";
+import { NavLink, useHistory } from "react-router-dom";
 import React from "react";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import ProfileButton from "./ProfileButton";
 import LoginFormModal from "../LoginFromModal";
 import SignupFormModal from "../SignupFormModal";
+import * as sessionActions from "../../store/session";
 
 function Navigation({ isLoaded }) {
+  const dispatch = useDispatch();
+  const history = useHistory();
   const sessionUser = useSelector((state) => state.session.user);
+  const handleDemo = (e) => {
+    e.preventDefault();
+    let credential = "Just Tasting!";
+    let password = "password";
+    dispatch(sessionActions.login({ credential, password }));
+    history.push("/profile");
+  };
+
   let sessionLinks;
   let homeLink;
   if (sessionUser) {
     sessionLinks = <ProfileButton user={sessionUser} />;
     homeLink = (
-      <NavLink className="navLink" to="/profile">
+      <NavLink className="navLink" id="homeLink" to="/profile">
         Home
       </NavLink>
     );
@@ -21,10 +32,11 @@ function Navigation({ isLoaded }) {
       <div className="form__buttons">
         <LoginFormModal />
         <SignupFormModal />
+        <button onClick={handleDemo}>Demo</button>
       </div>
     );
     homeLink = (
-      <NavLink className="navLink" to="/splash">
+      <NavLink className="navLink" id="homeLink" to="/splash">
         Home
       </NavLink>
     );
@@ -34,13 +46,15 @@ function Navigation({ isLoaded }) {
     <nav>
       <menu>
         {homeLink}
-        <NavLink className="navLink" to="/beers">
+        <NavLink className="navLink" id="beerLink" to="/beers">
           Beers
         </NavLink>
-        <NavLink className="navLink" to="/reviews">
+        <NavLink className="navLink" id="reviewsLink" to="/reviews">
           Reviews
         </NavLink>
-        <div className="logo__nav">zoigl</div>
+        <div className="logo__nav" id="navLogo">
+          zoigl
+        </div>
         {isLoaded && sessionLinks}
       </menu>
     </nav>

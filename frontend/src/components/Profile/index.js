@@ -8,7 +8,7 @@ export default function Profile() {
   if (!user) return null;
 
   return (
-    <div>
+    <div className="profile__container">
       <div className="profile__info">
         <h1>Welcome {user.username}</h1>
         <img
@@ -16,7 +16,7 @@ export default function Profile() {
           alt="profile"
           className="profile__img"
         />
-        <div>Brewery: {user.breweryName}</div>
+        <div>{user.breweryName}</div>
       </div>
       <div className="profile__display-container">
         <div className="profile__beers-div">

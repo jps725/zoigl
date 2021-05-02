@@ -17,20 +17,28 @@ export default function ReviewsFeed() {
   const reviews = useSelector((state) => {
     const reviewsList = Object.values(state.review);
     return reviewsList?.map((review) => (
-      <div key={review.id} value={review.Beer.id}>
+      <div key={review.id} value={review.Beer.id} className="review__div">
         <div>
-          <div>Beer Name: {review.Beer.name}</div>
-          <div>Brewery: {review.Beer.User.breweryName}</div>
-          <div>Rating: {review.rating}</div>
-          <div>Review: {review.review}</div>
+          <div className="beerName__grid">Beer Name: {review.Beer.name}</div>
+          <div className="brewery__grid">
+            Brewery: {review.Beer.User.breweryName}
+          </div>
+          <div className="rating__grid">Rating: {review.rating}</div>
+          <div className="review__grid">Review: {review.review}</div>
           <img
             className="beer__img"
             src={review.Beer.beerImageUrl}
             alt="beer logo"
           />
         </div>
-        <EditReviewFormModal review={review} />
-        <button value={review.id} onClick={handleDelete}>
+        <div className="editReview__grid">
+          <EditReviewFormModal review={review} />
+        </div>
+        <button
+          value={review.id}
+          onClick={handleDelete}
+          className="deleteReview__grid"
+        >
           Delete
         </button>
       </div>
@@ -40,7 +48,7 @@ export default function ReviewsFeed() {
   return (
     <div>
       <h1>Reviews</h1>
-      {reviews}
+      <div className="reviews__feedContainer">{reviews}</div>
     </div>
   );
 }

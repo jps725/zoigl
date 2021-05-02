@@ -19,7 +19,7 @@ function App() {
   });
 
   return (
-    <div>
+    <>
       <Navigation isLoaded={isLoaded} />
       {isLoaded && (
         <Switch>
@@ -32,7 +32,7 @@ function App() {
           <Route path="/reviews">
             <ReviewsFeed />
           </Route>
-          <Route path="/" exact>
+          <Route path="/splash">
             <Splash />
           </Route>
           <Route path="/profile">
@@ -41,7 +41,7 @@ function App() {
         </Switch>
       )}
       <Footer />
-    </div>
+    </>
   );
 }
 

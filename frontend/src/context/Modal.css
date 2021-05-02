@@ -7,6 +7,8 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  text-align: center;
+  font-family: "Montserrat", sans-serif;
 }
 
 #modal-background {
@@ -20,5 +22,5 @@
 
 #modal-content {
   position: absolute;
-  background-color: gold;
+  background-color: rgba(233, 204, 37);
 }

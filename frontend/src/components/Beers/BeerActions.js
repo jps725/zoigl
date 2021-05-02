@@ -12,14 +12,14 @@ function BeerActionMenu({ beer }) {
     setShowBeerMenu(true);
   };
 
-  //   useEffect(() => {
-  //     if (!showBeerMenu) return;
-  //     const closeMenu = () => {
-  //       setShowBeerMenu(false);
-  //     };
-  //     document.addEventListener("click", closeMenu);
-  //     return () => document.removeEventListener("click", closeMenu);
-  //   }, [showBeerMenu]);
+  // useEffect(() => {
+  //   if (!showBeerMenu) return;
+  //   const closeMenu = () => {
+  //     setShowBeerMenu(false);
+  //   };
+  //   document.addEventListener("click", closeMenu);
+  //   return () => document.removeEventListener("click", closeMenu);
+  // }, [showBeerMenu]);
 
   const handleDelete = (e) => {
     dispatch(beerActions.deleteBeer(e.target.value));

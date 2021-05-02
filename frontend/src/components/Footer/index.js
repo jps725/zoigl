@@ -1,8 +1,8 @@
 export default function Footer() {
   return (
     <footer className="footer">
-      Created By Josh Steinberg
-      <div>
+      <div className="footer__name">Created By Josh Steinberg</div>
+      <div className="footer__icons">
         <a href="https://github.com/jps725">
           <i className="fab fa-github" />
         </a>

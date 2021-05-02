@@ -1,15 +1,21 @@
 /* TODO Add site wide styles */
-html,
-body {
-  /* background: rgb(252, 201, 58); */
-  background-color: rgb(245, 240, 240);
 
-  background-size: cover;
-  margin: 0;
-  padding: 0;
-  height: 100%;
-  font-family: "Montserrat", sans-serif;
+#root {
+  background: rgb(227, 159, 12);
+  background: linear-gradient(
+    60deg,
+    rgba(227, 159, 12, 0.6) 0%,
+    rgba(233, 204, 37, 0.6) 50%,
+    rgba(255, 255, 255, 0.6) 100%
+  );
 }
+
+input:focus,
+textarea:focus,
+button:focus {
+  outline: 0;
+}
+
 #page__div {
   min-height: 100%;
   position: relative;
@@ -49,28 +55,57 @@ button {
   text-decoration: none;
   padding: 0.25em;
   font-family: "Maven Pro", sans-serif;
-  background-color: rgb(33, 179, 33);
+  background-color: rgba(223, 142, 3, 0.598);
 }
 
 .errors {
-  color: rgba(169, 0, 0, 0.831);
+  color: rgba(113, 3, 3, 0.831);
   font-family: "Montserrat", sans-serif;
   padding: 0.25em;
   box-sizing: border-box;
 }
 
 .footer {
-  position: absolute;
+  position: sticky;
   left: 0;
   bottom: 0;
   right: 0;
   text-align: right;
-  background-color: white;
+  background-color: orange;
   padding: 0.5em;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  font-family: "Montserrat", sans-serif;
+  font-size: 1em;
+  /* margin-top: 50em; */
 }
 
-.fab {
+.footer__icons {
   text-decoration: none;
+  display: flex;
+  flex-direction: row;
+  align-content: space-between;
+  margin-right: 1em;
+}
+.fa-github {
+  margin-left: 0.5em;
+  font-size: 2em;
+  color: purple;
+  text-decoration: none;
+}
+.fa-linkedin {
+  margin-right: 0.5em;
+  margin-left: 0.5em;
+  font-size: 2em;
+  color: rgb(66, 66, 233);
+  text-decoration: none;
+}
+.footer__name {
+  display: flex;
+  align-items: center;
+  font-size: 1.25em;
+  color: white;
 }
 
 nav {
@@ -78,12 +113,21 @@ nav {
   background-repeat: no-repeat;
   background-size: contain;
   background-position: center;
-  background-color: rgb(233, 204, 37);
+  /* background-color: rgba(233, 204, 37, 0.8); */
+
+  background: rgb(227, 159, 12);
+  background: linear-gradient(
+    60deg,
+    rgba(227, 159, 12, 0.6) 0%,
+    rgba(233, 204, 37, 0.6) 50%,
+    rgba(255, 255, 255, 0.6) 100%
+  );
+  box-shadow: 0.5em 0.5em 0.5em rgba(0, 0, 0, 0.25);
+
   height: 4em;
-  position: relative;
-  z-index: 12;
+  /* position: relative; */
+  /* z-index: 12; */
   border: 0;
-  position: relative;
   padding: 10px;
   display: flex;
   /* display: flex; */
@@ -102,6 +146,7 @@ nav {
   cursor: pointer;
   font-family: "Teko", sans-serif;
   font-size: 2em;
+  position: relative;
 }
 
 .navLink:active {
@@ -116,31 +161,26 @@ menu {
   justify-content: center;
 }
 
-menu :nth-child(1) {
+#homeLink {
   order: 2;
 }
-menu :nth-child(2) {
+#beerLink {
   order: 2;
 }
-menu :nth-child(3) {
+#reviewsLink {
   order: 2;
 }
 
-menu :nth-child(4) {
-  order: 3;
-  margin-left: 6em;
+#navLogo {
+  order: 4;
+  margin-left: 8em;
   font-family: "Teko", sans-serif;
   font-size: 5em;
 }
-menu :nth-child(5) {
+#beerGlassLink {
   order: 1;
 }
 
-@media screen and (max-width: 768px) {
-  menu {
-    display: none;
-  }
-}
 .form__buttons button {
   border-radius: 4px;
   color: black;
@@ -149,13 +189,14 @@ menu :nth-child(5) {
   transition: all 0.2s ease-in-out;
   text-decoration: none;
   padding: 0.25em;
+  margin-left: 0.5em;
   font-family: "Montserrat", sans-serif;
 }
 
 .form__buttons {
   display: flex;
   align-items: center;
-  order: 4;
+  order: 1;
 
   margin-left: auto;
 }
@@ -205,6 +246,10 @@ menu :nth-child(5) {
   margin-top: 2em;
 }
 
+.profile__info {
+  text-align: center;
+  font-family: "Montserrat", sans-serif;
+}
 .addBeer__button {
   position: sticky;
 }
@@ -217,7 +262,15 @@ menu :nth-child(5) {
   width: 5em;
 }
 .beer__list__container {
+  font-family: "Montserrat", sans-serif;
+  font-size: 1em;
+  box-sizing: border-box;
+  border: 1px dashed black;
+  margin-left: 2em;
+  height: 100vh;
+  overflow: scroll;
   margin-top: 2em;
+  width: 35em;
 }
 .beer__div--display {
   box-sizing: border-box;
@@ -229,7 +282,17 @@ menu :nth-child(5) {
   display: flex;
   flex-direction: column;
 }
-
+.reviews__feedContainer {
+  font-family: "Montserrat", sans-serif;
+  font-size: 1em;
+  box-sizing: border-box;
+  border: 1px dashed black;
+  margin-left: 2em;
+  height: 100vh;
+  overflow: scroll;
+  margin-top: 2em;
+  width: 35em;
+}
 .reviews__container {
   height: 15em;
   overflow: scroll;
@@ -238,7 +301,242 @@ menu :nth-child(5) {
   border-radius: 4px;
   margin: 1em;
 }
+
+/* .review__div {
+  display: grid;
+  grid-template-rows: 1fr 1fr 1fr 1fr 0.5fr;
+  grid-template-columns: 1fr 3fr;
+  grid-template-areas:
+    "beerImg name"
+    "beerImg brewery"
+    "beerImg rating"
+    "beerImg review"
+    "editButton deleteButton";
+}
+
+.beerName__grid {
+  grid-area: name;
+}
+.brewery__grid {
+  grid-area: brewery;
+}
+.rating__grid {
+  grid-area: rating;
+}
+.review__grid {
+  grid-area: review;
+}
+.beer__img {
+  grid-area: beerImg;
+}
+.editReview__grid {
+  grid-area: editButton;
+}
+.deleteReview__grid {
+  grid-area: deleteButton;
+} */
+
 .beerActions__menu--button {
   background-color: seashell;
   color: black;
+}
+
+/* Splash Page */
+/* .splash__img {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 100%;
+
+} */
+
+html {
+  height: 100%;
+  background: rgb(227, 159, 12);
+  background: linear-gradient(
+    60deg,
+    rgba(227, 159, 12, 0.6) 0%,
+    rgba(233, 204, 37, 0.6) 50%,
+    rgba(255, 255, 255, 0.6) 100%
+  );
+}
+
+body {
+  margin: 0;
+  height: 100%;
+}
+
+.bg {
+  animation: slide 4s ease-in-out infinite alternate;
+  background-image: linear-gradient(
+    -60deg,
+    rgb(233, 204, 37) 50%,
+    rgb(227, 159, 12) 50%
+  );
+  bottom: 0;
+  left: -50%;
+  opacity: 0.5;
+  position: fixed;
+  right: -50%;
+  top: 0;
+  z-index: -1;
+}
+
+.bg2 {
+  animation-direction: alternate-reverse;
+  animation-duration: 5s;
+}
+
+.bg3 {
+  animation-duration: 6s;
+}
+
+.content {
+  background-color: rgba(255, 214, 81, 0.8);
+  border-radius: 0.25em;
+  box-shadow: 1em 1em 1em rgba(0, 0, 0, 0.25);
+  box-sizing: border-box;
+  left: 50%;
+  padding: 2vmin;
+  position: fixed;
+  text-align: center;
+  top: 50%;
+  width: 12em;
+  height: 9.25em;
+  transform: translate(-50%, -50%);
+  font-family: "Teko", sans-serif;
+  font-size: 4em;
+  color: rgba(0, 0, 0, 0.687);
+}
+.img__container {
+  position: relative;
+  height: 5em;
+  width: 5em;
+  left: 0;
+  right: 0;
+}
+
+@keyframes fadeInOut {
+  0% {
+    opacity: 1;
+  }
+  45% {
+    opacity: 1;
+  }
+  55% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+.img__container img {
+  position: absolute;
+  box-sizing: border-box;
+  left: 0;
+  right: 0;
+  margin: auto;
+  -webkit-animation-name: fade;
+  -webkit-animation-iteration-count: infinite;
+  -webkit-animation-duration: 12s;
+  animation-name: fade;
+  animation-iteration-count: infinite;
+  animation-duration: 12s;
+}
+.img__container img.splash__img1 {
+  animation-delay: -12s;
+  -webkit-animation-delay: -12s;
+}
+
+.img__container img.splash__img2 {
+  animation-delay: -8s;
+  -webkit-animation-delay: -8s;
+}
+
+.img__container img.splash__img3 {
+  animation-delay: -4s;
+  -webkit-animation-delay: -4s;
+}
+.splash__img1 {
+  width: 11.35em;
+  height: 7.25em;
+  border-radius: 0.25em;
+}
+.splash__img2 {
+  width: 11.35em;
+  height: 7.25em;
+  border-radius: 0.25em;
+}
+
+.splash__img3 {
+  width: 11.35em;
+  height: 7.25em;
+  border-radius: 0.25em;
+}
+@-webkit-keyframes fade {
+  0% {
+    opacity: 0;
+  }
+  20% {
+    opacity: 0.5;
+  }
+  40% {
+    opacity: 1;
+  }
+  60% {
+    opacity: 1;
+  }
+  80% {
+    opacity: 0.5;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+@keyframes fade {
+  0% {
+    opacity: 0;
+  }
+
+  40% {
+    opacity: 1;
+  }
+  60% {
+    opacity: 1;
+  }
+
+  100% {
+    opacity: 0;
+  }
+}
+
+@keyframes slide {
+  0% {
+    transform: translateX(-25%);
+  }
+  100% {
+    transform: translateX(25%);
+  }
+}
+
+.menu__profile--dropdown {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  font-family: "Montserrat", sans-serif;
+  font-size: 2em;
+  background-color: rgba(255, 214, 81);
+  box-shadow: 0.5em 0.5em 0.5em rgba(0, 0, 0, 0.25);
+  border-radius: 3px;
+  align-items: center;
+  padding: 0.25em;
+  border: 1px solid rgba(0, 0, 0, 0.5);
+}
+.logout__button {
+  margin-bottom: 0.5em;
+  margin-top: 0.5em;
+  width: 5em;
+  height: 2em;
 }

@@ -61,7 +61,7 @@ export default function Beers() {
   });
 
   return (
-    <div>
+    <div className="allBeer__container">
       <h1>Beers</h1>
       <AddBeerFormModal />
       <div className="beer__list__container">{beers}</div>
