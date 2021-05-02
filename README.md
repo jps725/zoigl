@@ -40,7 +40,6 @@ Reviews Feed - Displays all of the reviews
     });
 ```
 
-[![Image from Gyazo](https://i.gyazo.com/84ca7665bddf80ed1f656b33061284b1.gif)](https://gyazo.com/84ca7665bddf80ed1f656b33061284b1)
 
 ## Future Features
   * Users will be able to search and filter based on selected criteria
