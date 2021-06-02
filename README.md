@@ -2,7 +2,7 @@
 
 A clone of Untappd for homebrewers, which gives users the ability to share their homebrews, review, create and attend events.
 
-[Live Link]:(https://zoigl.herokuapp.com/)
+[Zoigl](https://zoigl.herokuapp.com/)
 
 ## Techonolgies Use:
   * Express
