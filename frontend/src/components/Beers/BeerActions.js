@@ -3,7 +3,7 @@ import { useDispatch } from "react-redux";
 import EditBeerFormModal from "../EditBeerFormModal";
 import * as beerActions from "../../store/beers";
 import AddReviewFormModal from "../AddReviewFormModal";
-function BeerActionMenu({ beer }) {
+function BeerActionMenu({ beer, idx }) {
   const dispatch = useDispatch();
   const [showBeerMenu, setShowBeerMenu] = useState(false);
 
@@ -32,9 +32,9 @@ function BeerActionMenu({ beer }) {
       </button>
       {showBeerMenu && (
         <div className="beerActions__menu--dropdown">
-          <EditBeerFormModal beer={beer} />
-          <AddReviewFormModal beer={beer} />
-          <button value={beer.id} onClick={handleDelete}>
+          <EditBeerFormModal beer={beer} idx={idx} />
+          <AddReviewFormModal beer={beer} idx={idx} />
+          <button value={idx} onClick={handleDelete}>
             Delete Beer
           </button>
         </div>
