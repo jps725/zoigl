@@ -168,6 +168,29 @@ const remove = async (id) => {
   return beer.id;
 };
 
+router.get(
+  "/:id",
+  asyncHandler(async (req, res) => {
+    const beerId = req.params.id;
+    const beer = await db.Beer.findOne({
+      where: {
+        id: beerId,
+      },
+      include: [
+        {
+          model: db.User,
+          attributes: ["breweryName"],
+        },
+        {
+          model: db.Review,
+          include: [{ model: db.User }],
+        },
+      ],
+    });
+    res.json({ beer });
+  })
+);
+
 router.delete(
   "/:id",
   asyncHandler(async (req, res) => {

@@ -4,11 +4,19 @@ const LOAD = "beers/LOAD";
 const ADD_ONE = "beers/ADD_ONE";
 const UPDATE_ONE = "beers/UPDATE_ONE";
 const REMOVE_ONE = "beers/REMOVE_ONE";
+const LOAD_ONE = "beers/LOAD_ONE";
 
 const load = (beerList) => {
   return {
     type: LOAD,
     beerList,
+  };
+};
+
+const loadOne = (beer) => {
+  return {
+    type: LOAD_ONE,
+    beer,
   };
 };
 
@@ -32,6 +40,14 @@ export const getBeers = () => async (dispatch) => {
   if (res.ok) {
     const { beers } = await res.json();
     dispatch(load(beers));
+  }
+};
+
+export const getOneBeer = (id) => async (dispatch) => {
+  const res = await csrfFetch(`/api/beers/${id}`);
+  if (res.ok) {
+    const { beer } = await res.json();
+    dispatch(loadOne(beer));
   }
 };
 
@@ -119,6 +135,10 @@ const beerReducer = (state = initialState, action) => {
     case REMOVE_ONE: {
       const newState = { ...state };
       delete newState[action.beerId];
+      return newState;
+    }
+    case LOAD_ONE: {
+      let newState = [...action.beer];
       return newState;
     }
 

@@ -71,7 +71,6 @@ const EditBeerForm = ({ onClose, beer, idx }) => {
         userId,
         image,
         id,
-        idx,
       };
       dispatch(beerActions.updateBeer(payload));
       // .catch(async (res) => {

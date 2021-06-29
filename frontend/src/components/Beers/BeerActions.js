@@ -8,7 +8,9 @@ function BeerActionMenu({ beer, idx }) {
   const [showBeerMenu, setShowBeerMenu] = useState(false);
 
   const openMenu = () => {
-    if (showBeerMenu) return;
+    if (showBeerMenu) {
+      setShowBeerMenu(false);
+    }
     setShowBeerMenu(true);
   };
 

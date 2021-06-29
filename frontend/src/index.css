@@ -281,7 +281,10 @@ menu {
   width: 30em;
   display: flex;
   flex-direction: column;
+  align-items: center;
+  background-color: white;
 }
+
 .reviews__feedContainer {
   font-family: "Montserrat", sans-serif;
   font-size: 1em;
