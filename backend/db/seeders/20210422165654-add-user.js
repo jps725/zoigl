@@ -1,6 +1,7 @@
 "use strict";
 const faker = require("faker");
 const bcrypt = require("bcryptjs");
+const { breweryNames } = require("../../randomSeeder/randomBeer");
 
 module.exports = {
   up: (queryInterface, Sequelize) => {
@@ -20,12 +21,13 @@ module.exports = {
     const randomNumber = (max) => {
       return Math.floor(Math.random() * max);
     };
+
     for (let i = 1; i < randomUsers; i++) {
       let randomUser = {
         email: faker.internet.email(),
         username: faker.internet.userName(),
         hashedPassword: bcrypt.hashSync(`whatsOnTap${randomNumber(i)}`),
-        breweryName: `${faker.company.catchPhraseAdjective()} ${faker.company.catchPhraseNoun()} Brewing`,
+        breweryName: breweryNames[Math.floor(Math.random() * 5)],
         profileImageUrl: faker.internet.avatar(),
       };
       seededUsers.push(randomUser);

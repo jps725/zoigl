@@ -24,7 +24,6 @@ module.exports = {
       },
       breweryName: {
         type: Sequelize.STRING(100),
-        unique: true,
       },
       profileImageUrl: {
         type: Sequelize.STRING,

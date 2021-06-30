@@ -255,25 +255,42 @@ menu {
 }
 
 .beerLogo__img {
-  width: 5em;
+  max-width: 100px;
+  align-self: center;
 }
 
 .beer__img {
   width: 5em;
 }
+.beer__page--header {
+  font-family: "Montserrat", sans-serif;
+  font-size: 3em;
+  text-align: center;
+}
+
+.allBeer__container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
 .beer__list__container {
   font-family: "Montserrat", sans-serif;
   font-size: 1em;
   box-sizing: border-box;
-  border: 1px dashed black;
-  margin-left: 2em;
+  /* border: 1px dashed black; */
   height: 100vh;
-  overflow: scroll;
+  overflow-y: scroll;
+  overflow-x: hidden;
   margin-top: 2em;
   width: 35em;
 }
+.beer__div--name {
+  text-align: center;
+}
 .beer__div--display {
   box-sizing: border-box;
+  background-color: whitesmoke;
   border-radius: 4px;
   font-family: "Montserrat", sans-serif;
   box-shadow: 3px 3px 3px rgba(0, 0, 0, 0.5);
@@ -281,6 +298,10 @@ menu {
   width: 30em;
   display: flex;
   flex-direction: column;
+}
+
+.beer__div--stats {
+  padding: 0.5em;
 }
 .reviews__feedContainer {
   font-family: "Montserrat", sans-serif;

@@ -35,7 +35,6 @@ module.exports = (sequelize, DataTypes) => {
       },
       breweryName: {
         type: DataTypes.STRING,
-        unique: true,
         validate: {
           len: [5, 100],
         },
