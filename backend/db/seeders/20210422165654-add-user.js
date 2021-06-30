@@ -15,7 +15,7 @@ module.exports = {
       },
     ];
 
-    const randomUsers = 100;
+    const randomUsers = 25;
 
     const randomNumber = (max) => {
       return Math.floor(Math.random() * max);

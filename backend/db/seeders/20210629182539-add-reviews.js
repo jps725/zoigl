@@ -14,7 +14,7 @@ module.exports = {
     */
     let randomReviews = [];
 
-    const reviewCount = 300;
+    const reviewCount = 100;
 
     for (let i = 0; i < reviewCount; i++) {
       let randomRating = Math.floor(Math.random() * 5) + 1;
@@ -27,8 +27,8 @@ module.exports = {
 
       let reviewString = revPartOne + " " + revPartTwo;
 
-      let randomUserId = Math.floor(Math.random() * 99) + 1;
-      let randomBeerId = Math.floor(Math.random() * 99) + 1;
+      let randomUserId = Math.floor(Math.random() * 25) + 1;
+      let randomBeerId = Math.floor(Math.random() * 50) + 1;
       let currentReview = {
         userId: randomUserId,
         beerId: randomBeerId,

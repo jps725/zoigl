@@ -9,11 +9,11 @@ module.exports = {
         type: Sequelize.INTEGER,
       },
       name: {
-        type: Sequelize.STRING(50),
+        type: Sequelize.STRING(100),
         allowNull: false,
       },
       style: {
-        type: Sequelize.STRING(50),
+        type: Sequelize.STRING(100),
         allowNull: false,
       },
       userId: {
@@ -22,6 +22,9 @@ module.exports = {
         references: {
           model: "Users",
         },
+      },
+      description: {
+        type: Sequelize.STRING(2000),
       },
       status: {
         type: Sequelize.STRING(25),
