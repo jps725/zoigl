@@ -41,13 +41,13 @@ export const getBeers = () => async (dispatch) => {
   }
 };
 
-export const getOneBeer = (id) => async (dispatch) => {
-  const res = await fetch(`/api/beers/${id}`);
-  if (res.ok) {
-    const beer = await res.json();
-    dispatch(loadOne(beer));
-  }
-};
+// export const getOneBeer = (id) => async (dispatch) => {
+//   const res = await fetch(`/api/beers/${id}`);
+//   if (res.ok) {
+//     const beer = await res.json();
+//     dispatch(loadOne(beer));
+//   }
+// };
 
 export const createBeer = (beer) => async (dispatch) => {
   const { name, style, status, ibus, abv, userId, image } = beer;
@@ -138,6 +138,10 @@ const beerReducer = (state = initialState, action) => {
         [action.beer.id]: action.beer,
       };
     }
+    // case LOAD_ONE: {
+    //   let newState = { ...action.beer };
+    //   return newState;
+    // }
     case REMOVE_ONE: {
       const newState = { ...state };
       delete newState[action.beerId];

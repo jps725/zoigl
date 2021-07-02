@@ -20,10 +20,7 @@ export default function Profile() {
       </div>
       <div className="profile__display-container">
         <div className="profile__beers-div">
-          <Beers />
-        </div>
-        <div className="profile__events-div">
-          <Events />
+          <Beers userId={user.id} />
         </div>
       </div>
     </div>

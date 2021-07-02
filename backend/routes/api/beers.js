@@ -174,4 +174,13 @@ router.delete(
   })
 );
 
+router.get(
+  "/:id",
+  asyncHandler(async (req, res) => {
+    const id = req.params.id;
+    const beer = await db.Beer.findByPk(id);
+    return res.json({ beer });
+  })
+);
+
 module.exports = router;

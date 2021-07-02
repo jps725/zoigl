@@ -1,5 +1,6 @@
 import { useSelector, useDispatch } from "react-redux";
 import { useEffect } from "react";
+import { useHistory } from "react-router-dom";
 // import { getBeers } from "../../store/beers";
 import AddBeerFormModal from "../AddBeerFormModal";
 // import EditBeerFormModal from "../EditBeerFormModal";
@@ -7,12 +8,18 @@ import * as beerActions from "../../store/beers";
 // import AddReviewFormModal from "../AddReviewFormModal";
 import BeerActionMenu from "./BeerActions";
 
-export default function Beers() {
+export default function Beers({ userId }) {
   const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch(beerActions.getBeers());
   }, [dispatch]);
+
+  // const handleSingleBeer = (e) => {
+  //   let id = e.target.value;
+  //   console.log("------", id);
+  //   history.push(`/beers/${id}`);
+  // };
 
   // const handleDelete = (e) => {
   //   dispatch(beerActions.deleteBeer(e.target.value));
@@ -20,7 +27,7 @@ export default function Beers() {
   const beers = useSelector((state) => {
     const beerList = Object.values(state.beer);
     return beerList?.map((beer) => (
-      <div key={beer.id} className="beer__div--display">
+      <div key={beer.id} className="beer__div--display" value={beer.id}>
         <h2 className="beer__div--name">{beer.name}</h2>
         <BeerActionMenu beer={beer} />
         {/* <EditBeerFormModal beer={beer} />
@@ -41,6 +48,11 @@ export default function Beers() {
           <div className="beer__div--stats">Status: {beer.status}</div>
           <div className="beer__div--stats">IBUs: {beer.ibus}</div>
           <div className="beer__div--stats">ABV: {beer.abv}%</div>
+          <div className="beer__div--stats">
+            Description: <br></br>
+            <br></br>
+            {beer.description}
+          </div>
           {/* <div className="reviews__container">
             {beer.Reviews?.map((review) => (
               <div key={review.id} className="review__div">
