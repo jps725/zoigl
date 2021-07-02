@@ -1,6 +1,5 @@
 import { useSelector } from "react-redux";
 import Beers from "../Beers";
-import Events from "../Events";
 
 export default function Profile() {
   const user = useSelector((state) => state.session.user);

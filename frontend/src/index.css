@@ -248,6 +248,10 @@ menu {
   flex-direction: column;
   align-items: center;
 }
+.beer__navlink {
+  text-decoration: none;
+  color: black;
+}
 
 .allBeer__container {
   display: flex;

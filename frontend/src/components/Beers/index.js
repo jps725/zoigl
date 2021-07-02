@@ -1,6 +1,6 @@
 import { useSelector, useDispatch } from "react-redux";
 import { useEffect } from "react";
-import { useHistory } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 // import { getBeers } from "../../store/beers";
 import AddBeerFormModal from "../AddBeerFormModal";
 // import EditBeerFormModal from "../EditBeerFormModal";
@@ -15,12 +15,6 @@ export default function Beers({ userId }) {
     dispatch(beerActions.getBeers());
   }, [dispatch]);
 
-  // const handleSingleBeer = (e) => {
-  //   let id = e.target.value;
-  //   console.log("------", id);
-  //   history.push(`/beers/${id}`);
-  // };
-
   // const handleDelete = (e) => {
   //   dispatch(beerActions.deleteBeer(e.target.value));
   // };
@@ -28,49 +22,55 @@ export default function Beers({ userId }) {
     const beerList = Object.values(state.beer);
     return beerList?.map((beer) => (
       <div key={beer.id} className="beer__div--display" value={beer.id}>
-        <h2 className="beer__div--name">{beer.name}</h2>
-        <BeerActionMenu beer={beer} />
-        {/* <EditBeerFormModal beer={beer} />
+        <NavLink to={`/beers/${beer.id}`} className="beer__navlink">
+          <h2 className="beer__div--name">{beer.name}</h2>
+          <BeerActionMenu beer={beer} />
+          {/* <EditBeerFormModal beer={beer} />
         <AddReviewFormModal beer={beer} />
         <button value={beer.id} onClick={handleDelete}>
-          Delete Beer
-        </button> */}
-        <img
-          className="beerLogo__img"
-          alt="beer logo"
-          src={beer.beerImageUrl}
-        />
-        <div>
-          <div className="beer__div--stats">
-            Brewery: {beer.User.breweryName}
-          </div>
-          <div className="beer__div--stats">Style: {beer.style}</div>
-          <div className="beer__div--stats">Status: {beer.status}</div>
-          <div className="beer__div--stats">IBUs: {beer.ibus}</div>
-          <div className="beer__div--stats">ABV: {beer.abv}%</div>
-          <div className="beer__div--stats">
-            Description: <br></br>
-            <br></br>
-            {beer.description}
-          </div>
-          {/* <div className="reviews__container">
+        Delete Beer
+      </button> */}
+          <img
+            className="beerLogo__img"
+            alt="beer logo"
+            src={beer.beerImageUrl}
+          />
+          <div>
+            <div className="beer__div--stats">
+              Brewery: {beer.User.breweryName}
+            </div>
+            <div className="beer__div--stats">Style: {beer.style}</div>
+            <div className="beer__div--stats">Status: {beer.status}</div>
+            <div className="beer__div--stats">IBUs: {beer.ibus}</div>
+            <div className="beer__div--stats">ABV: {beer.abv}%</div>
+            <div className="beer__div--stats">
+              Description: <br></br>
+              <br></br>
+              {beer.description}
+            </div>
+            {/* <div className="reviews__container">
             {beer.Reviews?.map((review) => (
               <div key={review.id} className="review__div">
-                <div>Review: {review.review} </div>
-                <div>Rating: {review.rating}</div>
-                <div>By User: {review.User.username}</div>
-                <img
-                  className="profile__img--review"
-                  src={review.User.profileImageUrl}
-                  alt="profile"
-                />
+              <div>Review: {review.review} </div>
+              <div>Rating: {review.rating}</div>
+              <div>By User: {review.User.username}</div>
+              <img
+              className="profile__img--review"
+              src={review.User.profileImageUrl}
+              alt="profile"
+              />
               </div>
-            ))}
-          </div> */}
-        </div>
+              ))}
+            </div> */}
+          </div>
+        </NavLink>
       </div>
     ));
   });
+
+  if (!beers) {
+    return null;
+  }
 
   return (
     <div className="allBeer__container">
