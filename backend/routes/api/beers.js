@@ -40,10 +40,10 @@ router.get(
           model: db.User,
           attributes: ["breweryName"],
         },
-        // {
-        //   model: db.Review,
-        //   include: [{ model: db.User }],
-        // },
+        {
+          model: db.Review,
+          include: [{ model: db.User }],
+        },
       ],
       order: [["updatedAt", "DESC"]],
       limit: 10,

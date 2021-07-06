@@ -30,9 +30,10 @@ const editBeer = (beer) => ({
   beer,
 });
 
-const removeBeer = (beerId) => ({
+const removeBeer = (beerId, idx) => ({
   type: REMOVE_ONE,
   beerId,
+  idx,
 });
 
 export const getBeers = () => async (dispatch) => {
@@ -110,11 +111,11 @@ export const updateBeer = (beer) => async (dispatch) => {
   }
 };
 
-export const deleteBeer = (beerId) => async (dispatch) => {
+export const deleteBeer = (beerId, idx) => async (dispatch) => {
   await csrfFetch(`api/beers/${beerId}`, {
     method: "DELETE",
   });
-  dispatch(removeBeer(beerId));
+  dispatch(removeBeer(beerId, idx));
   return;
 };
 const initialState = [];
@@ -133,12 +134,14 @@ const beerReducer = (state = initialState, action) => {
       return [action.beer, ...state];
     }
     case REMOVE_ONE: {
-      const newState = { ...state };
-      delete newState[action.beerId];
+      const newState = [...state];
+      newState.splice(action.idx, 1);
       return newState;
     }
     case LOAD_ONE: {
-      let newState = [...action.beer];
+      console.log(action.beer);
+      let newState = [action.beer];
+
       return newState;
     }
 
