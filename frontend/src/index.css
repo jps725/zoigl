@@ -239,10 +239,10 @@ menu {
   font-family: "Montserrat", sans-serif;
   font-size: 1em;
   box-sizing: border-box;
-  border: 1px dashed black;
+
   margin-left: 2em;
   height: 100vh;
-  overflow: scroll;
+
   margin-top: 2em;
 }
 
@@ -265,12 +265,29 @@ menu {
   font-family: "Montserrat", sans-serif;
   font-size: 1em;
   box-sizing: border-box;
-  border: 1px dashed black;
-  margin-left: 2em;
+  display: flex;
+  flex-direction: column;
+  align-content: center;
+  align-items: center;
   height: 100vh;
-  overflow: scroll;
+  overflow-y: scroll;
+  overflow-x: hidden;
   margin-top: 2em;
   width: 35em;
+}
+.beer__navLink {
+  color: black;
+  text-decoration: none;
+}
+.allBeer__container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.allBeer__container > h1 {
+  font-family: "Montserrat", sans-serif;
+  font-size: 4em;
 }
 .beer__div--display {
   box-sizing: border-box;
@@ -278,10 +295,19 @@ menu {
   font-family: "Montserrat", sans-serif;
   box-shadow: 3px 3px 3px rgba(0, 0, 0, 0.5);
   margin: 1em;
-  width: 30em;
+  max-height: 600px;
+  height: 600px;
+  max-width: 400px;
+  width: 400px;
   display: flex;
   flex-direction: column;
+  align-items: center;
+  align-content: center;
+  background-color: white;
+  text-align: center;
+  padding: 1em;
 }
+
 .reviews__feedContainer {
   font-family: "Montserrat", sans-serif;
   font-size: 1em;

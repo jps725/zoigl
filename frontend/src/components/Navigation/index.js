@@ -12,7 +12,7 @@ function Navigation({ isLoaded }) {
   const sessionUser = useSelector((state) => state.session.user);
   const handleDemo = (e) => {
     e.preventDefault();
-    let credential = "Just Tasting!";
+    let credential = "Demo";
     let password = "password";
     dispatch(sessionActions.login({ credential, password }));
     history.push("/profile");

@@ -3,12 +3,14 @@ import { useDispatch } from "react-redux";
 import EditBeerFormModal from "../EditBeerFormModal";
 import * as beerActions from "../../store/beers";
 import AddReviewFormModal from "../AddReviewFormModal";
-function BeerActionMenu({ beer }) {
+function BeerActionMenu({ beer, idx, userId }) {
   const dispatch = useDispatch();
   const [showBeerMenu, setShowBeerMenu] = useState(false);
 
   const openMenu = () => {
-    if (showBeerMenu) return;
+    if (showBeerMenu) {
+      setShowBeerMenu(false);
+    }
     setShowBeerMenu(true);
   };
 
@@ -20,10 +22,20 @@ function BeerActionMenu({ beer }) {
   //   document.addEventListener("click", closeMenu);
   //   return () => document.removeEventListener("click", closeMenu);
   // }, [showBeerMenu]);
-
   const handleDelete = (e) => {
-    dispatch(beerActions.deleteBeer(e.target.value));
+    dispatch(beerActions.deleteBeer(e.target.value, idx));
   };
+  let actions;
+  if (userId === beer.userId) {
+    actions = (
+      <>
+        <EditBeerFormModal beer={beer} idx={idx} />
+        <button value={beer.id} idx={idx} onClick={handleDelete}>
+          Delete Beer
+        </button>
+      </>
+    );
+  }
 
   return (
     <div>
@@ -32,11 +44,8 @@ function BeerActionMenu({ beer }) {
       </button>
       {showBeerMenu && (
         <div className="beerActions__menu--dropdown">
-          <EditBeerFormModal beer={beer} />
-          <AddReviewFormModal beer={beer} />
-          <button value={beer.id} onClick={handleDelete}>
-            Delete Beer
-          </button>
+          <AddReviewFormModal beer={beer} idx={idx} />
+          {actions}
         </div>
       )}
     </div>

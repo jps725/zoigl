@@ -4,11 +4,19 @@ const LOAD = "beers/LOAD";
 const ADD_ONE = "beers/ADD_ONE";
 const UPDATE_ONE = "beers/UPDATE_ONE";
 const REMOVE_ONE = "beers/REMOVE_ONE";
+const LOAD_ONE = "beers/LOAD_ONE";
 
 const load = (beerList) => {
   return {
     type: LOAD,
     beerList,
+  };
+};
+
+const loadOne = (beer) => {
+  return {
+    type: LOAD_ONE,
+    beer,
   };
 };
 
@@ -22,9 +30,10 @@ const editBeer = (beer) => ({
   beer,
 });
 
-const removeBeer = (beerId) => ({
+const removeBeer = (beerId, idx) => ({
   type: REMOVE_ONE,
   beerId,
+  idx,
 });
 
 export const getBeers = () => async (dispatch) => {
@@ -32,6 +41,14 @@ export const getBeers = () => async (dispatch) => {
   if (res.ok) {
     const { beers } = await res.json();
     dispatch(load(beers));
+  }
+};
+
+export const getOneBeer = (id) => async (dispatch) => {
+  const res = await csrfFetch(`/api/beers/${id}`);
+  if (res.ok) {
+    const { beer } = await res.json();
+    dispatch(loadOne(beer));
   }
 };
 
@@ -94,39 +111,37 @@ export const updateBeer = (beer) => async (dispatch) => {
   }
 };
 
-export const deleteBeer = (beerId) => async (dispatch) => {
+export const deleteBeer = (beerId, idx) => async (dispatch) => {
   await csrfFetch(`api/beers/${beerId}`, {
     method: "DELETE",
   });
-  dispatch(removeBeer(beerId));
+  dispatch(removeBeer(beerId, idx));
   return;
 };
-const initialState = {};
+const initialState = [];
 
 const beerReducer = (state = initialState, action) => {
   switch (action.type) {
     case LOAD: {
-      let newState = { ...state };
-      action.beerList.forEach((beer) => {
-        newState[beer.id] = beer;
-      });
+      let newState = [...action.beerList];
       return newState;
     }
     case ADD_ONE: {
-      return {
-        ...state,
-        [action.beer.id]: action.beer,
-      };
+      return [action.beer, ...state];
     }
     case UPDATE_ONE: {
-      return {
-        ...state,
-        [action.beer.id]: action.beer,
-      };
+      console.log(action.beer);
+      return [action.beer, ...state];
     }
     case REMOVE_ONE: {
-      const newState = { ...state };
-      delete newState[action.beerId];
+      const newState = [...state];
+      newState.splice(action.idx, 1);
+      return newState;
+    }
+    case LOAD_ONE: {
+      console.log(action.beer);
+      let newState = [action.beer];
+
       return newState;
     }
 
