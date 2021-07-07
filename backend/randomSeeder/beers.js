@@ -40,6 +40,9 @@ async function beerFunc() {
   if (!res.image_url) {
     res.image_url = images[Math.floor(Math.random() * 10)];
   }
+  if (!res.ibu) {
+    res.ibu = Math.floor(Math.random() * 100) + 15;
+  }
   let beer = {
     name: res.name,
     style: res.tagline,
