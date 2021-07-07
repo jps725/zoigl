@@ -44,6 +44,14 @@ export const getBeers = () => async (dispatch) => {
   }
 };
 
+export const getUserBeers = (userId) => async (dispatch) => {
+  const res = await csrfFetch(`/api/beers/user/${userId}`);
+  if (res.ok) {
+    const { beers } = await res.json();
+    dispatch(load(beers));
+  }
+};
+
 export const getOneBeer = (id) => async (dispatch) => {
   const res = await csrfFetch(`/api/beers/${id}`);
   if (res.ok) {
