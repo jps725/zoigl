@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import * as beerActions from "../../store/beers";
 import beerStyles from "../beerStyles";
 
-const EditBeerForm = ({ onClose, beer }) => {
+const EditBeerForm = ({ onClose, beer, idx }) => {
   const dispatch = useDispatch();
   const userId = useSelector((state) => state.session.user.id);
   const [name, setName] = useState(beer.name);

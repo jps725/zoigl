@@ -7,6 +7,7 @@ import AddBeerFormModal from "../AddBeerFormModal";
 import * as beerActions from "../../store/beers";
 // import AddReviewFormModal from "../AddReviewFormModal";
 import BeerActionMenu from "./BeerActions";
+import { NavLink } from "react-router-dom";
 
 export default function Beers({ userId }) {
   const dispatch = useDispatch();
@@ -15,16 +16,32 @@ export default function Beers({ userId }) {
     dispatch(beerActions.getBeers());
   }, [dispatch]);
 
+  const avgRating = (beer) => {
+    let sum = 0;
+    let numRevs = beer.Reviews.length;
+
+    beer.Reviews.forEach((review) => {
+      sum += review.rating;
+    });
+    return sum / numRevs;
+  };
+
   // const handleDelete = (e) => {
   //   dispatch(beerActions.deleteBeer(e.target.value));
   // };
   const beers = useSelector((state) => {
-    const beerList = Object.values(state.beer);
-    return beerList?.map((beer) => (
-      <div key={beer.id} className="beer__div--display" value={beer.id}>
-        <NavLink to={`/beers/${beer.id}`} className="beer__navlink">
-          <h2 className="beer__div--name">{beer.name}</h2>
-          <BeerActionMenu beer={beer} />
+
+    // const beerList = Object.values(state.beer);
+    return state.beer?.map((beer, idx) => (
+      <div key={beer.id} className="beer__div--display" value={idx}>
+        <NavLink to={`/beers/${beer.id}`} className="beer__navLink">
+          <h2>{beer.name}</h2>
+          <h3>
+            avg rating{" "}
+            {avgRating(beer) ? avgRating(beer) : "-- No Rating Yet --"}
+          </h3>
+
+
           {/* <EditBeerFormModal beer={beer} />
         <AddReviewFormModal beer={beer} />
         <button value={beer.id} onClick={handleDelete}>
@@ -36,6 +53,7 @@ export default function Beers({ userId }) {
             src={beer.beerImageUrl}
           />
           <div>
+
             <div className="beer__div--stats">
               Brewery: {beer.User.breweryName}
             </div>
@@ -48,6 +66,7 @@ export default function Beers({ userId }) {
               <br></br>
               {beer.description}
             </div>
+
             {/* <div className="reviews__container">
             {beer.Reviews?.map((review) => (
               <div key={review.id} className="review__div">
@@ -74,7 +93,9 @@ export default function Beers({ userId }) {
 
   return (
     <div className="allBeer__container">
-      <h1 className="beer__page--header">Homebrews</h1>
+
+      <h1>Recent Beers</h1>
+
       <AddBeerFormModal />
       <div className="beer__list__container">{beers}</div>
     </div>

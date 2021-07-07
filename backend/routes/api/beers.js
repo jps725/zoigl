@@ -45,8 +45,35 @@ router.get(
         //   include: [{ model: db.User }],
         // },
       ],
+      order: [["updatedAt", "DESC"]],
+      limit: 10,
     });
 
+    res.json({ beers });
+  })
+);
+
+router.get(
+  "/user/:id",
+  asyncHandler(async (req, res) => {
+    const userId = req.params.id;
+    const beers = await db.Beer.findAll({
+      where: {
+        userId,
+      },
+      include: [
+        {
+          model: db.User,
+          attributes: ["breweryName"],
+        },
+        {
+          model: db.Review,
+          include: [{ model: db.User }],
+        },
+      ],
+      order: [["updatedAt", "DESC"]],
+      limit: 10,
+    });
     res.json({ beers });
   })
 );
@@ -165,6 +192,29 @@ const remove = async (id) => {
   await db.Beer.destroy({ where: { id: beer.id } });
   return beer.id;
 };
+
+router.get(
+  "/:id",
+  asyncHandler(async (req, res) => {
+    const beerId = req.params.id;
+    const beer = await db.Beer.findOne({
+      where: {
+        id: beerId,
+      },
+      include: [
+        {
+          model: db.User,
+          attributes: ["breweryName"],
+        },
+        {
+          model: db.Review,
+          include: [{ model: db.User }],
+        },
+      ],
+    });
+    res.json({ beer });
+  })
+);
 
 router.delete(
   "/:id",
