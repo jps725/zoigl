@@ -281,6 +281,7 @@ menu {
 
 .beerLogo__img {
   max-width: 100px;
+  max-height: 200px;
   align-self: center;
 }
 
@@ -654,4 +655,13 @@ button {
   box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.25);
   font-family: "Montserrat", sans-serif;
   text-align: center;
+}
+
+.beerCard__stats {
+  text-align: left;
+  padding: 1em;
+}
+
+.beerCard__stats > div {
+  padding-top: 1em;
 }

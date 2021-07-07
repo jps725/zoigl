@@ -49,11 +49,11 @@ export default function Beers({ userId }) {
             <div className="beer__div--stats">Status: {beer.status}</div>
             <div className="beer__div--stats">IBUs: {beer.ibus}</div>
             <div className="beer__div--stats">ABV: {beer.abv}%</div>
-            <div className="beer__div--stats">
+            {/* <div className="beer__div--stats">
               Description: <br></br>
               <br></br>
               {beer.description}
-            </div>
+            </div> */}
 
             {/* <div className="reviews__container">
             {beer.Reviews?.map((review) => (

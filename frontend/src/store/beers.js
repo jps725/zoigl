@@ -125,8 +125,8 @@ export const deleteBeer = (beerId, idx) => async (dispatch) => {
   dispatch(removeBeer(beerId, idx));
   return;
 };
-const initialState = [];
 
+const initialState = [];
 const beerReducer = (state = initialState, action) => {
   switch (action.type) {
     case LOAD: {
@@ -137,14 +137,10 @@ const beerReducer = (state = initialState, action) => {
       return [action.beer, ...state];
     }
     case UPDATE_ONE: {
-      console.log(action.beer);
       return [action.beer, ...state];
     }
     case LOAD_ONE: {
-      return {
-        ...state,
-        [action.beer.id]: action.beer,
-      };
+      return [action.beer];
     }
     case REMOVE_ONE: {
       const newState = [...state];

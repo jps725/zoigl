@@ -196,7 +196,9 @@ const remove = async (id) => {
 router.get(
   "/:id",
   asyncHandler(async (req, res) => {
-    const beerId = req.params.id;
+    const id = req.params.id;
+    const beerId = Number(id);
+
     const beer = await db.Beer.findOne({
       where: {
         id: beerId,
@@ -212,6 +214,7 @@ router.get(
         },
       ],
     });
+
     res.json({ beer });
   })
 );

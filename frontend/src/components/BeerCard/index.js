@@ -8,11 +8,13 @@ export default function BeerCard() {
   const dispatch = useDispatch();
   const { id } = useParams();
   const beerId = Number(id);
+
   useEffect(() => {
     dispatch(getOneBeer(beerId));
   }, [dispatch, beerId]);
 
   const beer = useSelector((state) => state.beer[0]);
+
   const userId = useSelector((state) => state.session.user.id);
 
   const avgRating = (beer) => {
@@ -41,12 +43,17 @@ export default function BeerCard() {
         Delete Beer
       </button> */}
       <img className="beerLogo__img" alt="beer logo" src={beer.beerImageUrl} />
-      <div>
+      <div className="beerCard__stats">
         <div>Brewery: {beer.User.breweryName}</div>
         <div>Style: {beer.style}</div>
         <div>Status: {beer.status}</div>
         <div>IBUs: {beer.ibus}</div>
         <div>ABV: {beer.abv}%</div>
+        <div>
+          Description:
+          <br></br>
+          {beer.description}
+        </div>
         <div className="reviews__container">
           {beer.Reviews?.map((review) => (
             <div key={review.id} className="review__div">
