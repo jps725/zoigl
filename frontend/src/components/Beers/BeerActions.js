@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import EditBeerFormModal from "../EditBeerFormModal";
 import * as beerActions from "../../store/beers";
 import AddReviewFormModal from "../AddReviewFormModal";
-function BeerActionMenu({ beer, idx, userId }) {
+function BeerActionMenu({ beer, idx }) {
   const dispatch = useDispatch();
   const [showBeerMenu, setShowBeerMenu] = useState(false);
 
@@ -13,6 +13,12 @@ function BeerActionMenu({ beer, idx, userId }) {
     }
     setShowBeerMenu(true);
   };
+  const userId = useSelector((state) => {
+    if (state.session.user) {
+      return state.session.user.id;
+    }
+    return null;
+  });
 
   // useEffect(() => {
   //   if (!showBeerMenu) return;
@@ -39,15 +45,15 @@ function BeerActionMenu({ beer, idx, userId }) {
 
   return (
     <div>
-      <button className="beerActions__menu--button" onClick={openMenu}>
+      {/* <button className="beerActions__menu--button" onClick={openMenu}>
         <i className="fas fa-ellipsis-v" />
-      </button>
-      {showBeerMenu && (
-        <div className="beerActions__menu--dropdown">
-          <AddReviewFormModal beer={beer} idx={idx} />
-          {actions}
-        </div>
-      )}
+      </button> */}
+      {/* {showBeerMenu && ( */}
+      <div className="beerActions__menu--dropdown">
+        <AddReviewFormModal beer={beer} idx={idx} />
+        {actions}
+      </div>
+      {/* )} */}
     </div>
   );
 }

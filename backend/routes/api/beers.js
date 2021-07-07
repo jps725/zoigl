@@ -53,6 +53,31 @@ router.get(
   })
 );
 
+router.get(
+  "/user/:id",
+  asyncHandler(async (req, res) => {
+    const userId = req.params.id;
+    const beers = await db.Beer.findAll({
+      where: {
+        userId,
+      },
+      include: [
+        {
+          model: db.User,
+          attributes: ["breweryName"],
+        },
+        {
+          model: db.Review,
+          include: [{ model: db.User }],
+        },
+      ],
+      order: [["updatedAt", "DESC"]],
+      limit: 10,
+    });
+    res.json({ beers });
+  })
+);
+
 // router.get(
 //   "/:id",
 //   asyncHandler(async (req, res) => {

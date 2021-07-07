@@ -10,7 +10,6 @@ import { NavLink } from "react-router-dom";
 
 export default function Beers() {
   const dispatch = useDispatch();
-  const userId = useSelector((state) => state.session.user.id);
 
   useEffect(() => {
     dispatch(beerActions.getBeers());
@@ -35,8 +34,11 @@ export default function Beers() {
       <div key={beer.id} className="beer__div--display" value={idx}>
         <NavLink to={`/beers/${beer.id}`} className="beer__navLink">
           <h2>{beer.name}</h2>
-          <h3>avg rating {avgRating(beer)}</h3>
-          <BeerActionMenu userId={userId} beer={beer} idx={idx} />
+          <h3>
+            avg rating{" "}
+            {avgRating(beer) ? avgRating(beer) : "-- No Rating Yet --"}
+          </h3>
+
           {/* <EditBeerFormModal beer={beer} />
         <AddReviewFormModal beer={beer} />
         <button value={beer.id} onClick={handleDelete}>

@@ -31,7 +31,9 @@ export default function BeerCard() {
   return (
     <div className="beerCard">
       <h2>{beer.name}</h2>
-      <h3>avg rating {avgRating(beer)}</h3>
+      <h3>
+        avg rating {avgRating(beer) ? avgRating(beer) : "-- No Rating Yet --"}
+      </h3>
       <BeerActionMenu userId={userId} beer={beer} />
       {/* <EditBeerFormModal beer={beer} />
         <AddReviewFormModal beer={beer} />
@@ -48,14 +50,20 @@ export default function BeerCard() {
         <div className="reviews__container">
           {beer.Reviews?.map((review) => (
             <div key={review.id} className="review__div">
-              <div>Review: {review.review} </div>
+              <div>
+                Review:
+                <br></br>
+                {review.review}{" "}
+              </div>
               <div>Rating: {review.rating}</div>
-              <div>By User: {review.User.username}</div>
-              <img
-                className="profile__img--review"
-                src={review.User.profileImageUrl}
-                alt="profile"
-              />
+              <div>
+                <span>By User: {review.User.username}</span>
+                <img
+                  className="profile__img--review"
+                  src={review.User.profileImageUrl}
+                  alt="profile"
+                />
+              </div>
             </div>
           ))}
         </div>
