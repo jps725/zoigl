@@ -13,12 +13,10 @@ const load = (beerList) => {
   };
 };
 
-
 const loadOne = (beer) => ({
   type: LOAD_ONE,
   beer,
 });
-
 
 const addBeer = (beer) => ({
   type: ADD_ONE,
@@ -43,7 +41,6 @@ export const getBeers = () => async (dispatch) => {
     dispatch(load(beers));
   }
 };
-
 
 export const getUserBeers = (userId) => async (dispatch) => {
   const res = await csrfFetch(`/api/beers/user/${userId}`);
@@ -155,9 +152,7 @@ const beerReducer = (state = initialState, action) => {
       return newState;
     }
     case LOAD_ONE: {
-      console.log(action.beer);
       let newState = [action.beer];
-
       return newState;
     }
 

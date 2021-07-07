@@ -7,7 +7,6 @@ import AddBeerFormModal from "../AddBeerFormModal";
 import * as beerActions from "../../store/beers";
 // import AddReviewFormModal from "../AddReviewFormModal";
 import BeerActionMenu from "./BeerActions";
-import { NavLink } from "react-router-dom";
 
 export default function Beers({ userId }) {
   const dispatch = useDispatch();
@@ -26,11 +25,7 @@ export default function Beers({ userId }) {
     return sum / numRevs;
   };
 
-  // const handleDelete = (e) => {
-  //   dispatch(beerActions.deleteBeer(e.target.value));
-  // };
   const beers = useSelector((state) => {
-
     // const beerList = Object.values(state.beer);
     return state.beer?.map((beer, idx) => (
       <div key={beer.id} className="beer__div--display" value={idx}>
@@ -41,19 +36,12 @@ export default function Beers({ userId }) {
             {avgRating(beer) ? avgRating(beer) : "-- No Rating Yet --"}
           </h3>
 
-
-          {/* <EditBeerFormModal beer={beer} />
-        <AddReviewFormModal beer={beer} />
-        <button value={beer.id} onClick={handleDelete}>
-        Delete Beer
-      </button> */}
           <img
             className="beerLogo__img"
             alt="beer logo"
             src={beer.beerImageUrl}
           />
           <div>
-
             <div className="beer__div--stats">
               Brewery: {beer.User.breweryName}
             </div>
@@ -93,7 +81,6 @@ export default function Beers({ userId }) {
 
   return (
     <div className="allBeer__container">
-
       <h1>Recent Beers</h1>
 
       <AddBeerFormModal />

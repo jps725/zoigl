@@ -224,7 +224,6 @@ menu {
 
   flex-direction: row;
   justify-content: center;
-
 }
 
 .profile__events-div {
@@ -314,6 +313,7 @@ menu {
 
 .beer__div--name {
   text-align: center;
+}
 
 .beer__navLink {
   color: black;
@@ -328,7 +328,6 @@ menu {
 .allBeer__container > h1 {
   font-family: "Montserrat", sans-serif;
   font-size: 4em;
-
 }
 .beer__div--display {
   box-sizing: border-box;

@@ -40,10 +40,10 @@ router.get(
           model: db.User,
           attributes: ["breweryName"],
         },
-        // {
-        //   model: db.Review,
-        //   include: [{ model: db.User }],
-        // },
+        {
+          model: db.Review,
+          include: [{ model: db.User }],
+        },
       ],
       order: [["updatedAt", "DESC"]],
       limit: 10,
@@ -122,10 +122,10 @@ router.post(
               model: db.User,
               attributes: ["breweryName"],
             },
-            // {
-            //   model: db.Review,
-            //   include: [{ model: db.User }],
-            // },
+            {
+              model: db.Review,
+              include: [{ model: db.User }],
+            },
           ],
         });
         res.json({ newBeer });
@@ -173,10 +173,10 @@ router.put(
           model: db.User,
           attributes: ["breweryName"],
         },
-        // {
-        //   model: db.Review,
-        //   include: [{ model: db.User }],
-        // },
+        {
+          model: db.Review,
+          include: [{ model: db.User }],
+        },
       ],
     });
     res.json({ updatedWithInfo });
