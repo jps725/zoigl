@@ -103,4 +103,12 @@ const images = [
   "https://zoiglawsbucket.s3.amazonaws.com/seamless-1082193_1280.jpeg",
 ];
 
-module.exports = { images, beerStyles, status };
+const breweryNames = [
+  "Elevation Brewing",
+  "Wild Eagle Beer Co.",
+  "Hops 'r' Us Beers",
+  "Azul Cerveceria",
+  "Fullstack Brewing",
+];
+
+module.exports = { images, beerStyles, status, breweryNames };

@@ -40,10 +40,10 @@ router.get(
           model: db.User,
           attributes: ["breweryName"],
         },
-        {
-          model: db.Review,
-          include: [{ model: db.User }],
-        },
+        // {
+        //   model: db.Review,
+        //   include: [{ model: db.User }],
+        // },
       ],
       order: [["updatedAt", "DESC"]],
       limit: 10,
@@ -122,10 +122,10 @@ router.post(
               model: db.User,
               attributes: ["breweryName"],
             },
-            {
-              model: db.Review,
-              include: [{ model: db.User }],
-            },
+            // {
+            //   model: db.Review,
+            //   include: [{ model: db.User }],
+            // },
           ],
         });
         res.json({ newBeer });
@@ -173,10 +173,10 @@ router.put(
           model: db.User,
           attributes: ["breweryName"],
         },
-        {
-          model: db.Review,
-          include: [{ model: db.User }],
-        },
+        // {
+        //   model: db.Review,
+        //   include: [{ model: db.User }],
+        // },
       ],
     });
     res.json({ updatedWithInfo });
@@ -221,6 +221,16 @@ router.delete(
   asyncHandler(async (req, res) => {
     const beerId = await remove(req.params.id);
     return res.json({ beerId });
+  })
+);
+
+router.get(
+  "/:id",
+  asyncHandler(async (req, res) => {
+    const id = req.params.id;
+    console.log("-------------------------", id);
+    const beer = await db.Beer.findByPk(id);
+    return res.json({ beer });
   })
 );
 

@@ -66,11 +66,13 @@ export default function Profile() {
       </div>
       <div className="profile__display-container">
         <div className="profile__beers-div">
+
           <h1>My Beers</h1>
           <div className="profile__addButton">
             <AddBeerFormModal />
           </div>
           <div className="beer__list__container">{beers}</div>
+
         </div>
       </div>
     </div>

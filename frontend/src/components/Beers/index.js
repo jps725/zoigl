@@ -1,5 +1,6 @@
 import { useSelector, useDispatch } from "react-redux";
 import { useEffect } from "react";
+import { NavLink } from "react-router-dom";
 // import { getBeers } from "../../store/beers";
 import AddBeerFormModal from "../AddBeerFormModal";
 // import EditBeerFormModal from "../EditBeerFormModal";
@@ -8,7 +9,7 @@ import * as beerActions from "../../store/beers";
 import BeerActionMenu from "./BeerActions";
 import { NavLink } from "react-router-dom";
 
-export default function Beers() {
+export default function Beers({ userId }) {
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -29,6 +30,7 @@ export default function Beers() {
   //   dispatch(beerActions.deleteBeer(e.target.value));
   // };
   const beers = useSelector((state) => {
+
     // const beerList = Object.values(state.beer);
     return state.beer?.map((beer, idx) => (
       <div key={beer.id} className="beer__div--display" value={idx}>
@@ -38,6 +40,7 @@ export default function Beers() {
             avg rating{" "}
             {avgRating(beer) ? avgRating(beer) : "-- No Rating Yet --"}
           </h3>
+
 
           {/* <EditBeerFormModal beer={beer} />
         <AddReviewFormModal beer={beer} />
@@ -50,11 +53,20 @@ export default function Beers() {
             src={beer.beerImageUrl}
           />
           <div>
-            <div>Brewery: {beer.User.breweryName}</div>
-            <div>Style: {beer.style}</div>
-            <div>Status: {beer.status}</div>
-            <div>IBUs: {beer.ibus}</div>
-            <div>ABV: {beer.abv}%</div>
+
+            <div className="beer__div--stats">
+              Brewery: {beer.User.breweryName}
+            </div>
+            <div className="beer__div--stats">Style: {beer.style}</div>
+            <div className="beer__div--stats">Status: {beer.status}</div>
+            <div className="beer__div--stats">IBUs: {beer.ibus}</div>
+            <div className="beer__div--stats">ABV: {beer.abv}%</div>
+            <div className="beer__div--stats">
+              Description: <br></br>
+              <br></br>
+              {beer.description}
+            </div>
+
             {/* <div className="reviews__container">
             {beer.Reviews?.map((review) => (
               <div key={review.id} className="review__div">
@@ -75,9 +87,15 @@ export default function Beers() {
     ));
   });
 
+  if (!beers) {
+    return null;
+  }
+
   return (
     <div className="allBeer__container">
+
       <h1>Recent Beers</h1>
+
       <AddBeerFormModal />
       <div className="beer__list__container">{beers}</div>
     </div>

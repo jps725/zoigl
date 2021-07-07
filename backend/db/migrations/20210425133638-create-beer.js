@@ -23,6 +23,9 @@ module.exports = {
           model: "Users",
         },
       },
+      description: {
+        type: Sequelize.STRING(2000),
+      },
       status: {
         type: Sequelize.STRING(25),
         allowNull: false,

@@ -9,7 +9,9 @@ import ReviewsFeed from "./components/ReviewsFeed";
 import Splash from "./components/Splash";
 import Profile from "./components/Profile";
 import Footer from "./components/Footer";
+
 import BeerCard from "./components/BeerCard";
+
 
 function App() {
   const dispatch = useDispatch();
@@ -34,7 +36,9 @@ function App() {
             <Beers />
           </Route>
           <Route path="/beers/:id">
+
             <BeerCard />
+
           </Route>
           <Route path="/reviews">
             <ReviewsFeed />
