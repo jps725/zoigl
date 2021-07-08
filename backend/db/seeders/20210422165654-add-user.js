@@ -8,7 +8,7 @@ module.exports = {
     let seededUsers = [
       {
         email: "demo@brewery.com",
-        username: "Just Tasting!",
+        username: "Demo",
         hashedPassword: bcrypt.hashSync("password"),
         breweryName: "Demo Brewery",
         profileImageUrl:
