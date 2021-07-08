@@ -144,16 +144,15 @@ router.put(
   asyncHandler(async (req, res) => {
     const id = req.params.id;
     req.body.id = id;
+    const beer = await db.Beer.findByPk(id);
 
     let beerImageUrl;
     if (req.file) {
       beerImageUrl = await singlePublicFileUpload(req.file);
     } else {
-      beerImageUrl = "https://zoiglawsbucket.s3.amazonaws.com/cheers.jpeg";
+      beerImageUrl = beer.beerImageUrl;
     }
     req.body.beerImageUrl = beerImageUrl;
-
-    const beer = await db.Beer.findByPk(id);
 
     const validationErrors = validationResult(req);
     if (!validationErrors.isEmpty()) {

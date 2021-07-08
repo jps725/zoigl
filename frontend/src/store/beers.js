@@ -119,7 +119,7 @@ export const updateBeer = (beer) => async (dispatch) => {
 };
 
 export const deleteBeer = (beerId, idx) => async (dispatch) => {
-  await csrfFetch(`api/beers/${beerId}`, {
+  await csrfFetch(`/api/beers/${beerId}`, {
     method: "DELETE",
   });
   dispatch(removeBeer(beerId, idx));
@@ -143,12 +143,7 @@ const beerReducer = (state = initialState, action) => {
       return [action.beer];
     }
     case REMOVE_ONE: {
-      const newState = [...state];
-      newState.splice(action.idx, 1);
-      return newState;
-    }
-    case LOAD_ONE: {
-      let newState = [action.beer];
+      const newState = [];
       return newState;
     }
 

@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import * as reviewActions from "../../store/reviews";
+import * as beerActions from "../../store/beers";
 
 const AddReviewForm = ({ onClose, beer }) => {
   const dispatch = useDispatch();
@@ -35,6 +36,7 @@ const AddReviewForm = ({ onClose, beer }) => {
     const addReview = { rating, review, userId, beerId };
 
     dispatch(reviewActions.createReview(addReview));
+    dispatch(beerActions.getOneBeer(beerId));
     // .catch(async (res) => {
     //   await res.json();
     // });

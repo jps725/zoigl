@@ -9,14 +9,12 @@ import ReviewsFeed from "./components/ReviewsFeed";
 import Splash from "./components/Splash";
 import Profile from "./components/Profile";
 import Footer from "./components/Footer";
-
 import BeerCard from "./components/BeerCard";
-
+// import UserIdProvider from "./context/userIdContext";
 
 function App() {
   const dispatch = useDispatch();
   const [isLoaded, setIsLoaded] = useState(false);
-
   useEffect(() => {
     dispatch(sessionActions.restoreUser()).then(() => setIsLoaded(true));
   });
@@ -36,9 +34,7 @@ function App() {
             <Beers />
           </Route>
           <Route path="/beers/:id">
-
             <BeerCard />
-
           </Route>
           <Route path="/reviews">
             <ReviewsFeed />

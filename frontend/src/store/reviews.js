@@ -50,7 +50,7 @@ export const createReview = (formData) => async (dispatch) => {
   if (res.ok) {
     const newReview = await res.json();
     dispatch(addReview(newReview));
-    dispatch(beerActions.getBeers());
+    // dispatch(beerActions.getBeers());
     return newReview;
   }
 };

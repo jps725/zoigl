@@ -3,15 +3,16 @@ import { useEffect } from "react";
 import { NavLink } from "react-router-dom";
 import * as beerActions from "../../store/beers";
 import AddBeerFormModal from "../AddBeerFormModal";
-import Beers from "../Beers";
 
 export default function Profile() {
   const user = useSelector((state) => state.session.user);
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(beerActions.getUserBeers(user?.id));
-  }, [dispatch, user?.id]);
+    if (user) {
+      dispatch(beerActions.getUserBeers(user.id));
+    }
+  }, [dispatch, user?.id, user]);
 
   const avgRating = (beer) => {
     let sum = 0;

@@ -1,18 +1,13 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import EditBeerFormModal from "../EditBeerFormModal";
 import * as beerActions from "../../store/beers";
 import AddReviewFormModal from "../AddReviewFormModal";
+import { useHistory } from "react-router-dom";
 function BeerActionMenu({ beer, idx }) {
   const dispatch = useDispatch();
-  const [showBeerMenu, setShowBeerMenu] = useState(false);
+  const history = useHistory();
 
-  const openMenu = () => {
-    if (showBeerMenu) {
-      setShowBeerMenu(false);
-    }
-    setShowBeerMenu(true);
-  };
   const userId = useSelector((state) => {
     if (state.session.user) {
       return state.session.user.id;
@@ -30,6 +25,8 @@ function BeerActionMenu({ beer, idx }) {
   // }, [showBeerMenu]);
   const handleDelete = (e) => {
     dispatch(beerActions.deleteBeer(e.target.value, idx));
+    dispatch(beerActions.getUserBeers(userId));
+    history.push("/profile");
   };
   let actions;
   if (userId === beer.userId) {

@@ -6,7 +6,6 @@ import AddBeerFormModal from "../AddBeerFormModal";
 // import EditBeerFormModal from "../EditBeerFormModal";
 import * as beerActions from "../../store/beers";
 // import AddReviewFormModal from "../AddReviewFormModal";
-import BeerActionMenu from "./BeerActions";
 
 export default function Beers({ userId }) {
   const dispatch = useDispatch();
