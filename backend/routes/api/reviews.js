@@ -21,6 +21,8 @@ router.get(
         model: db.Beer,
         include: { model: db.User, attributes: ["breweryName"] },
       },
+      order: [["updatedAt", "DESC"]],
+      limit: 10,
     });
     res.json({ reviews });
   })
